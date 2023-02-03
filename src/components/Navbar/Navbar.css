@@ -1,0 +1,182 @@
+.starter-template {
+  /* padding: 3rem 1.5rem; */
+  text-align: center;
+}
+
+.nav-link {
+  color: rgb(255, 254, 255);
+}
+
+.nav-link:hover {
+  color: rgb(133, 255, 150);
+  cursor: pointer;
+}
+
+/* .collapse {
+  justify-content: right;
+} */
+.count {
+  background-color: white;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 15px;
+}
+.count:hover {
+  background-color: aquamarine;
+}
+.cart__count {
+  display: inline-block;
+  padding: 0px 7px;
+  color: rgb(0, 0, 0);
+  background-color: rgb(247, 247, 247);
+  border-radius: 100%;
+  padding: -3px;
+}
+.logoimg {
+  width: 150px;
+}
+.carticon {
+  font-size: 20px;
+  padding: 0;
+  color: aliceblue;
+  margin-top: 5px;
+  border: none;
+}
+.cartcount {
+  font-size: 10px;
+  /* margin-top: 8px; */
+}
+.carticon:hover {
+  color: aquamarine;
+  cursor: pointer;
+  border: none;
+}
+.searchBar {
+  width: 35rem;
+  /* height: 35px;
+  font-size: 20px;
+  padding-top: 5px;
+  /* margin: 0 150px 0 150px; */
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.navbar {
+  padding: 10px;
+  background-color: #25316d;
+  justify-content: space-evenly;
+  position: sticky;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.movieList {
+  display: list-item;
+  max-height: 20rem;
+  overflow: hidden;
+  overflow-y: scroll;
+  width: 35rem;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  z-index: 9;
+  border-radius: 5px;
+  background-color: #25316d;
+  animation: fadeIn 0.5s;
+}
+
+.hell {
+  justify-content: space-evenly;
+}
+.solid {
+  border-top: 2px solid #999;
+}
+.listClass {
+  font-size: 16px;
+  color: #f0f8ff;
+}
+.listClass:hover {
+  cursor: pointer;
+  background-color: #25316d4f;
+}
+
+.imageClass {
+  border-radius: 10px;
+  padding: 7px;
+  margin-right: 2%;
+}
+.noData {
+  color: white;
+  font-size: 14px;
+  margin-left: 3%;
+  margin-top: 2%;
+}
+.topnavbar {
+  align-items: center;
+}
+.watchListicon {
+  font-size: 20px;
+  color: aliceblue;
+  border: none;
+}
+:root {
+  --blue: #18af82;
+  --cyan: #a29bff;
+  --green: #f2ff7e;
+}
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.statusBar {
+  width: 100%;
+  height: 3px;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes progress {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(50%);
+  }
+}
+
+.statusBar::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: -100%;
+  will-change: transform;
+  background: linear-gradient(
+    90deg,
+    var(--blue) 0%,
+    var(--blue) 25%,
+    var(--cyan) 25%,
+    var(--cyan) 37.5%,
+    var(--green) 37.5%,
+    var(--green) 50%,
+    var(--blue) 50%,
+    var(--blue) 75%,
+    var(--cyan) 75%,
+    var(--cyan) 87.5%,
+    var(--green) 87.5%,
+    var(--green) 100%
+  );
+  animation: 1.8s progress ease infinite;
+}

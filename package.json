@@ -1,0 +1,87 @@
+{
+  "name": "frontendarmy",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@google-pay/button-react": "^3.0.0",
+    "@mui/material": "latest",
+    "@popperjs/core": "^2.11.5",
+    "@reduxjs/toolkit": "^1.8.5",
+    "@rsuite/icons": "^1.0.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "10.4.5",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.0-beta1",
+    "bootstrap-icons": "^1.9.1",
+    "browser-router": "^0.2.0",
+    "caniuse-lite": "^1.0.30001441",
+    "country-state-city": "^1.0.4",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "mdb-react-ui-kit": "^4.1.0",
+    "multi-range-slider-react": "^2.0.2",
+    "netlify-cli": "^10.13.0",
+    "node-static": "^0.7.11",
+    "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
+    "react-bootstrap": "^2.4.0",
+    "react-detect-click-outside": "^1.1.7",
+    "react-dom": "^18.2.0",
+    "react-dual-range-slider": "^1.0.4",
+    "react-dual-rangeslider": "^1.2.16",
+    "react-form-stepper": "^2.0.3",
+    "react-hook-form": "^7.36.1",
+    "react-hot-toast": "^2.4.0",
+    "react-js-multi-range-sliders": "^0.1.6",
+    "react-loader-spinner": "^5.1.7-beta.1",
+    "react-loading-skeleton": "^3.1.0",
+    "react-query": "^3.39.2",
+    "react-redux": "^8.0.4",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.4.0",
+    "react-select-country-list": "^2.2.3",
+    "react-slider": "^2.0.4",
+    "react-spinners": "^0.13.4",
+    "react-to-print": "^2.14.7",
+    "react-toastify": "^9.0.7",
+    "react-transition-group": "^4.4.2",
+    "rsuite": "^5.19.0",
+    "swiper": "^8.2.5",
+    "web-vitals": "^2.1.4"
+  },
+  "overrides": {
+    "autoprefixer": "10.4.5"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-scripts build",
+    "test": "react-app-rewired start",
+    "eject": "react-app-rewired start"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-router-dom": "^6.3.0"
+  }
+}

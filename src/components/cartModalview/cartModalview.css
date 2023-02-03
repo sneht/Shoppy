@@ -1,0 +1,102 @@
+.modalConatiner {
+  display: flex;
+}
+.headerModal {
+  color: rgb(0, 0, 0);
+  background-color: #cecec9;
+}
+.modalImage {
+  width: 30rem;
+  height: 17rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: 10px;
+  margin: 1rem;
+}
+.nameModal {
+  margin-left: 1rem;
+  font-size: 25px;
+}
+.priceModal {
+  margin-left: 1rem;
+  font-size: 25px;
+}
+.descriptionModal {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+.counterModal {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.counterbuttonModal {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 1, 1);
+  font-size: 25px;
+  border: none;
+  height: 3rem;
+  border-radius: 50%;
+  width: 3rem;
+}
+.counterNum {
+  margin: 2% 6% 0 6%;
+  font-size: 20px;
+}
+.counterbuttonModal:hover {
+  background-color: rgb(243, 245, 249);
+}
+.addcartToModal {
+  margin-top: 1%;
+}
+.gobackButton {
+  background-color: rgba(47, 46, 65);
+  color: rgb(240, 248, 255);
+  border: none;
+  border-radius: 10px;
+}
+.cartbuttonModal {
+  background-color: rgba(47, 46, 65);
+  color: rgb(240, 248, 255);
+  height: 3rem;
+  border: none;
+  border-radius: 10px;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+.cartbuttonModal:hover {
+  background: rgb(2, 178, 144);
+  color: rgb(0, 0, 0);
+}
+@media only screen and (max-width: 1024px) {
+  .modalImage {
+    height: 9rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .modalConatiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .nameModal {
+    text-align: center;
+  }
+  .priceModal {
+    text-align: center;
+  }
+  .modalImage {
+    width: 10rem;
+  }
+  .descriptionModal {
+    text-align: center;
+  }
+  .counterNum {
+    margin: 3% 6% 0 6%;
+  }
+}
+@media only screen and (max-width: 374px) {
+  .cartbuttonModal {
+    padding: 12px;
+  }
+}

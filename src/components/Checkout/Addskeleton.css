@@ -1,0 +1,11 @@
+.mainskeleton{
+    height: 120;
+    width: 500;
+    box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px;
+    border-radius: 5px;
+    padding: 12px;
+    margin:2px
+}
+.s1{
+    margin-left: 33px;
+}

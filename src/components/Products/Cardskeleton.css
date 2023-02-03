@@ -1,0 +1,28 @@
+.imgskeleton {
+  margin: 6%;
+  border-radius: 5px;
+}
+.Hskeleton {
+  border-radius: 5px;
+  margin-left: 25%;
+}
+.subHskeleton{
+    margin-left: 12%;
+    margin-top: 2%;
+    border-radius: 5px;
+}
+.skelprice{
+    
+    margin-top: 5px;
+    margin-left: 20px;
+    border-radius: 5px;
+;
+}
+.skelbutton{
+    border-radius: 5px;
+    /* margin-left: 25%; */
+    margin-top: 13%;
+}
+.skecarda{
+    padding-bottom: 26px;
+}

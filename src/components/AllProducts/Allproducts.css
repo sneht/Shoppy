@@ -1,0 +1,296 @@
+.data_container {
+  margin-top: 2rem;
+}
+.cardView {
+  width: 20%;
+  float: left;
+  margin-left: 3%;
+  margin-right: 2%;
+  margin-top: 2%;
+  font-size: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-bottom: 1%;
+}
+.card-img-top {
+  width: 175;
+  height: 175;
+}
+.cardView:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.BuyButton {
+  background-color: #25316d;
+  color: rgb(240, 248, 255);
+  font-size: 16px;
+  border: none;
+  height: 2.5rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+  font-family: "Public Sans", sans-serif;
+}
+
+.third_container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 11px;
+  align-items: center;
+}
+.fourth_container {
+  font-size: 16px;
+  height: 2.5rem;
+}
+.BuyButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  background: rgb(6, 7, 7);
+  color: rgb(255, 255, 255);
+}
+@media only screen and (max-width: 1200px) {
+  .cardView {
+    width: 20%;
+    font-size: 20px;
+  }
+  .BuyButton {
+    margin-left: 30%;
+    height: 3.5rem;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .cardView {
+    width: 28%;
+    font-size: 20px;
+  }
+  .BuyButton {
+    margin-left: 30%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .cardView {
+    width: 44%;
+    font-size: 20px;
+  }
+  .BuyButton {
+    margin-left: 30%;
+    width: 60%;
+  }
+  .third_container {
+    display: block;
+    text-align: center;
+  }
+  .fourth_container {
+    margin-left: 12%;
+  }
+  .fifth_container {
+    margin-right: 20%;
+    margin-left: 20%;
+  }
+}
+@media only screen and (max-width: 355px) {
+  .BuyButton {
+    margin-left: 6%;
+    height: 10%;
+    min-width: 88%;
+  }
+}
+/*SCROLLS */
+.scroll_products {
+  overflow-y: scroll;
+  height: 600px;
+}
+/*SIDE BAR CATEGORY COMPONENT*/
+.slide li a {
+  text-decoration: none;
+  color: rgb(45, 47, 49);
+}
+/* .navbar {
+  width: auto;
+  background: rgb(255, 255, 255);
+  margin-left: 5%;
+}
+.navbar span {
+  padding: 30px;
+  background: rgb(45, 47, 49);
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
+  font-variant: small-caps;
+  cursor: pointer;
+  display: block;
+  border-radius: 10px;
+} */
+/* .navbar span::after {
+  float: right;
+  right: 10%;
+  content: "+";
+} */
+.slide {
+  clear: both;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  text-align: center;
+  transition: height 0.4s ease;
+  font-size: 19px;
+}
+.slide li {
+  padding: 25px;
+}
+#touch {
+  position: absolute;
+  opacity: 0.5;
+  height: 0px;
+}
+.label_nav {
+  width: 100%;
+}
+#touch:checked + .slide {
+  height: 130px;
+}
+.filter_div {
+  margin-top: 1%;
+  position: fixed;
+}
+.data_div {
+  margin-left: 22%;
+  margin-top: -2%;
+}
+@media only screen and (max-width: 1024px) {
+  .filter_div {
+    margin-top: 7%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .filter_div {
+    margin-top: 10%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .filter_div {
+    margin-top: 13%;
+  }
+  .font_cardView b {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 374px) {
+  .filter_div {
+    margin-top: 20%;
+  }
+}
+.font_cardView {
+  text-align: center;
+  font-size: 17px;
+}
+.skeimg {
+  width: 178px;
+  height: 178px;
+  margin: 12px;
+  border-radius: 5px;
+}
+.skeHeading {
+  margin: 7px;
+  margin-left: 45px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+.skesubHeading {
+  margin-left: 60px;
+  border-radius: 5px;
+}
+.skeprice {
+  border-radius: 5px;
+}
+.skebutton {
+  border-radius: 5px;
+}
+
+.sortby {
+  margin-left: 3%;
+  margin-top: 6%;
+}
+.sortbyspan {
+  margin-left: 8px;
+  background: #25316d;
+  color: white;
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+.sortbynone {
+  margin-left: 8px;
+  background: white;
+  color: rgb(0, 0, 0);
+  /* border: 1px solid #25316d; */
+  font-size: 12px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.sortbynone:hover {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  background: #25316d;
+  color: white;
+}
+.sortbyspan:hover {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.productLength {
+  font-size: 14px;
+  padding: 12px;
+}
+.skeLabel {
+  border-bottom-right-radius: 5px;
+}
+.topLabelSke {
+  display: flex;
+}
+.topBarCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.saveIcon {
+  margin-right: 5%;
+  font-size: 20px;
+  cursor: pointer;
+  color: #25316d;
+  background: white;
+  padding: 3px;
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-top: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* .saveIcon:hover {
+  color: #ffffff;
+  background: #25316d;
+  animation: fadeInAnimation 1s;
+} */
+.spinner-border {
+  font-size: 12px;
+}
+.productBrud {
+  margin-top: 2%;
+  margin-left: 5%;
+  text-decoration: none;
+}

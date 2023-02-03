@@ -1,0 +1,45 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.statusBar {
+  width: 100%;
+  height: 3px;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes progress {
+    0% {
+      transform: translate(0);
+    }
+    100% {
+      transform: translate(50%);
+    }
+  }
+  
+  .statusBar::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -100%;
+    will-change: transform;
+    background: linear-gradient(
+      90deg,
+      var(--blue) 0%,
+      var(--blue) 25%,
+      var(--cyan) 25%,
+      var(--cyan) 37.5%,
+      var(--green) 37.5%,
+      var(--green) 50%,
+      var(--blue) 50%,
+      var(--blue) 75%,
+      var(--cyan) 75%,
+      var(--cyan) 87.5%,
+      var(--green) 87.5%,
+      var(--green) 100%
+    );
+    animation: 1.8s progress ease infinite;
+  }

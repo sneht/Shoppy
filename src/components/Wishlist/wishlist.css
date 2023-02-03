@@ -1,0 +1,41 @@
+.maincard {
+  padding: 5px;
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+  margin: 1%;
+  border-radius: 10px;
+  /* text-align: center;
+  justify-content: center; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.wishCard {
+  margin: 1%;
+}
+.remove {
+  border: none;
+  background: #ff938e;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+
+  color: black;
+}
+.noWishList {
+  text-align: center;
+}
+
+.WishListimg {
+  width: 150px;
+}
+.NOWishListimg {
+  width: 440px;
+}
+.mainLoading {
+  margin-left: -10%;
+  margin-top: 15%;
+}
+.cardSec {
+  margin-left: 15%;
+}

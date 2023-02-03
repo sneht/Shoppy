@@ -1,0 +1,221 @@
+.slide li a {
+  text-decoration: none;
+  color: rgb(45, 47, 49);
+}
+.sidenavbar {
+  width: auto;
+  margin-left: 5%;
+}
+.sidenavbar span {
+  margin-right: 10px;
+  padding: 20px;
+  /* background: rgb(7, 104, 84); */
+  /* background:rgb(195, 255, 221); */
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  border-radius: 5px;
+  border: none;
+  transition: 0.4s;
+  text-decoration: none;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 5px;
+  font-family: "Public Sans", sans-serif;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.sidenavbar span:hover {
+  /* background: rgb(112, 162, 152);*/
+  background: #25316d;
+  color: white;
+}
+.sidenavbarafter span {
+  background: #25316d;
+  color: white;
+}
+.slide {
+  clear: both;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  text-align: center;
+  transition: height 0.4s ease;
+  font-size: 19px;
+}
+.slide li {
+  padding: 25px;
+}
+#touch {
+  position: absolute;
+  opacity: 0.5;
+  height: 0px;
+}
+.label_nav {
+  width: 100%;
+}
+#touch:checked + .slide {
+  height: 130px;
+}
+/**********  ENABLE THIS SCROLLER IF MORE CATEGORIES AE THERE  ***************/
+.scroll_filter {
+  overflow-y: scroll;
+  height: 550px;
+}
+/************************/
+/*USE THIS FOR A DROPDON IF HAVE SUBCATEGORIES */
+/* <div className="sidenavbar" onClick={()=>console.log("WORKS")} >
+<label htmlFor="touch" className="label_nav"  >
+  <span>Categorey name</span>
+</label>
+<input type="checkbox" id="touch" />
+<ul className="slide">
+  <li>
+    <a href="/">Sub category</a>
+  </li>
+  <li>
+    <a href="/">Sub category</a>
+  </li>
+</ul>
+</div> */
+/************************/
+.scroll {
+  overflow-y: scroll;
+  height: 540px;
+  width: 100%;
+  text-align: justify;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 15%;
+  padding-left: 2px;
+}
+.scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  box-shadow: inset 0 0 6px #cecec963;
+}
+.skeleton {
+  border-radius: 12px;
+  margin: 4% 0 0 7%;
+  width: 90%;
+}
+.skeleton_box {
+  margin-top: 8%;
+}
+.sidebar {
+  margin-right: 10px;
+  background: #25316d4f;
+  padding: 8px;
+  color: black;
+  margin-top: 3%;
+  text-align: center;
+  margin-left: 15px;
+  border-radius: 5px;
+  border-top: 3px solid #25316d;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+  box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px,
+    rgb(60 64 67 / 15%) 0px 1px 3px 1px;
+}
+.categoryList {
+  margin-bottom: 10px;
+}
+.imgcategory {
+  width: 40px;
+  border-radius: 10px;
+}
+.textCard {
+  padding-left: 5px;
+}
+
+.filterClass {
+  width: auto;
+  margin-left: 5%;
+}
+.filterSpan {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  border-radius: 5px;
+  border: none;
+  transition: 0.4s;
+  text-decoration: none;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 5px;
+  font-family: "Public Sans", sans-serif;
+
+  display: block;
+  align-items: center;
+  /* text-align: center; */
+}
+.priceHead {
+  border-radius: 5px;
+  background: #24316d;
+  color: white;
+  /* border: 1px solid red; */
+  text-align: center;
+  font-size: 16px;
+}
+.headTag {
+  padding: 10px;
+  padding: 5px;
+  font-size: 12px;
+  background: #25316d;
+  border-top: 3px solid #25316d;
+  color: white;
+  border-radius: 5px;
+}
+.form-check-label {
+  margin-left: 4%;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.form-check-label:hover {
+  color: green;
+}
+
+.selfinput {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1%;
+  text-align: center;
+}
+
+.inputselfField {
+  width: 35%;
+  margin-right: 4px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid #24316d;
+}
+
+.selfInputButton {
+  background-color: #24316d;
+  width: 20%;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 4px;
+  font-size: 12px;
+}
+.priceCheckbox {
+  margin-left: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}

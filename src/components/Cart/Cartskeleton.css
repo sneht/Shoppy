@@ -1,0 +1,27 @@
+.s1 {
+  border-radius: 5px;
+  margin-top: 6px;
+}
+
+.s2 {
+  margin-top: 16px;
+  border-radius: 5px;
+}
+
+.s3 {
+  margin-left: 28%;
+  border-radius: 5px;
+}
+
+.stable {
+  margin-top: 30px;
+  border-radius: 5px;
+}
+
+.stabledata {
+  margin-top: 10px;
+  border-radius: 5px;
+}
+.containerBig {
+  margin: 8%;
+}

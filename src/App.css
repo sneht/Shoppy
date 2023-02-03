@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@500&display=swap");
+.body {
+  position: relative;
+  overflow-y: scroll;
+  height: 440px;
+  width: 100%;
+  text-align: justify;
+  font-family: "Public Sans", sans-serif;
+}
+.button {
+  cursor: pointer;
+  background-color: rgba(47, 46, 65);
+  padding: 8px 35px;
+  border: none;
+  border-radius: 5px;
+  transition: 0.4s;
+  color: rgb(240, 248, 255);
+  text-decoration: none;
+  text-align: center;
+  width: 100%;
+}
+.dbutton {
+  cursor: pointer;
+  background-color: rgb(233, 25, 25);
+  padding: 5px 20px;
+  border: none;
+  border-radius: 5px;
+  transition: 0.4s;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-family: "Public Sans", sans-serif;
+  background-color: rgb(241, 69, 69);
+}
+.errorstyle {
+  color: rgb(23, 2, 2);
+  background-color: rgb(252, 157, 157);
+  border-radius: 5px;
+  margin-top: 2%;
+  font-size: 14px;
+  margin-bottom: 0rem rem;
+  text-align: center;
+
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.Sstyle {
+  color: rgb(23, 2, 2);
+  background-color: rgb(174, 255, 172);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.text {
+  text-decoration: none;
+  font-family: "Public Sans", sans-serif;
+}
+.svg {
+  margin-left: 5px;
+}
+.header_one {
+  font-weight: 600;
+  margin-top: 3%;
+  text-align: center;
+  color: #25316d;
+  font-family: "Public Sans", sans-serif;
+  font-size: 24px;
+}
+.header_two {
+  text-align: center;
+  font-family: "Public Sans", sans-serif;
+  font-size: 18px;
+}
+.badge {
+  background-color: rgb(116, 189, 115);
+  padding: 3px;
+}
+#RFS-StepButton {
+  /* background-color: rgba(47, 46, 65); */
+  text-align: center;
+  font-family: "Public Sans", sans-serif;
+  font-size: 18px;
+}
+/* n-d6-0-2-26.active{
+  background-color: rgba(47, 46, 65);
+} */
+#RFS-Label {
+  font-family: "Public Sans", sans-serif;
+  font-size: 16px;
+}
+#activeColor {
+  background-color: rgba(47, 46, 65);
+}
+.svgicon {
+  width: 28px;
+  height: 28px;
+  padding: 2%;
+}
+.logo {
+  text-decoration: none;
+  color: white;
+  font-size: 22px;
+}
+.logo span {
+  color: rgb(213, 179, 243);
+  font-size: 14px;
+}
+.logo:hover {
+  color: aquamarine;
+}
+
+.body::-webkit-scrollbar {
+  width: 5px;
+}
+.body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+.body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgb(2, 178, 144);
+}
