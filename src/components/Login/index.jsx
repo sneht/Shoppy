@@ -63,8 +63,9 @@ export default function Login() {
     };
     const response = await loginHandlerData(body); // eslint-disable-next-line
     if (response.success) {
+      console.log(response?.data);
       localStorage.setItem("accessToken", response?.data.token);
-      localStorage.setItem("userData", JSON.stringify(response?.data));
+      localStorage.setItem("Data", JSON.stringify(response?.data));
       setSelected(false);
       navigate("/");
       successnotify(response.message);
