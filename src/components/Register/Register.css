@@ -25,10 +25,12 @@ body {
 .col-2 {
   width: 50%;
 }
-
-.back {
-  /* background-color: rgb(47, 38, 49); */
+.showPassword{
+  margin-top: 9px;
 }
+/* .back {
+  background-color: rgb(47, 38, 49);
+} */
 
 @media only screen and (max-width: 844px) {
   [class*="col-"] {

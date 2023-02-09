@@ -4,7 +4,7 @@ import Register from "./components/Register";
 import { Toaster } from "react-hot-toast";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProductList from "./components/ProductList";
+// import ProductList from "./components/ProductList";
 // import Navbar from "./components/Navbar";
 // import Dashboard from "./components/Dashboard";
 // import Categories from "./components/Categories";

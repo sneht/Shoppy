@@ -3,8 +3,8 @@ export const get = async (url) => {
   const response = await axios
     .get(url)
     .then((res) => {
-      if(res.status === 200) {
-        if(res.data?.success) {
+      if (res.status === 200) {
+        if (res.data?.success) {
           return res.data?.data;
         }
       } else {
@@ -69,9 +69,11 @@ export const post = async (url, data) => {
         if (res.data?.success) {
           return res.data?.data.list ? res.data?.data.list : res.data;
         } else {
-          return [];
+          return res.data;
+          // [];
         }
       } else {
+        console.log("4");
         return [];
       }
     })

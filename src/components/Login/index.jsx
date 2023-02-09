@@ -6,14 +6,17 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { loginHandlerData } from "../../service/auth.service";
 import toast from "react-hot-toast";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 export default function Login() {
-  const [email, setMail] = useState(" ");
-  const [emailErr, setemailErr] = useState(false);
-  const [password, setPwd] = useState(" ");
+  const [email, setMail] = useState("");
+  const [emailErr, setEmailErr] = useState(false);
+  const [password, setPwd] = useState("");
   const [pwdErr, setpwdErr] = useState(false);
   const [msg, setMsg] = useState(null);
   const [selected, setSelected] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   // const [authtoken, setauthToken] = useState();
   const navigate = useNavigate();
   const successnotify = (msg) =>
@@ -22,32 +25,33 @@ export default function Login() {
 
   const validation = () => {
     let formIsValid = true;
-    if (!password) {
-      formIsValid = false;
-      setpwdErr("Your Password is required");
-    }
-    if (!email) {
-      formIsValid = false;
-      setemailErr("Your Email is required");
-    }
-    if (!validEmail.test(email)) {
-      formIsValid = false;
-      setemailErr("Your Email is invalid");
-    }
 
-    if (!validPaasword.test(password)) {
+    if (!email) {
+      setEmailErr("Your Email is required");
+      formIsValid = false;
+    } else if (!validEmail.test(email)) {
+      formIsValid = false;
+      setEmailErr("Your Email is invalid");
+    }
+    if (!password) {
+      setpwdErr("Your Password is required");
+      formIsValid = false;
+    } else if (!validPaasword.test(password)) {
       formIsValid = false;
       setpwdErr("Your Password is invalid");
     }
-
     return formIsValid;
   };
   const handleSubmit = (e) => {
-    if (validation() !== true) {
-    } else {
+    if (validation()) {
       postData(e);
       setSelected(true);
     }
+    // if (validation() !== true) {
+    // } else {
+    //   postData(e);
+    //   setSelected(true);
+    // }
     e.preventDefault();
   };
 
@@ -69,8 +73,6 @@ export default function Login() {
       errornotify(response.message);
       setSelected(false);
     }
-
-    // setMsg(response.message);
   };
 
   return (
@@ -98,11 +100,12 @@ export default function Login() {
                     type="email"
                     className="form-control "
                     placeholder="email"
+                    value={email}
                     name="email"
                     aria-describedby="addon-wrapping"
                     onChange={(e) => [
                       setMail(e.target.value),
-                      setemailErr(" "),
+                      setEmailErr(" "),
                       setMsg(""),
                     ]}
                   />
@@ -115,10 +118,11 @@ export default function Login() {
                 <label className="form-label">Password</label>
                 <div className="form-floating mb-1">
                   <input
-                    type="password"
+                    type={`${showPassword ? "text" : "password"}`}
                     className="form-control "
                     placeholder="Password"
                     name="password"
+                    value={password}
                     aria-describedby="addon-wrapping"
                     onChange={(e) => [
                       setPwd(e.target.value),
@@ -126,6 +130,18 @@ export default function Login() {
                       setMsg(""),
                     ]}
                   />
+                  <button
+                    className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted showPasswordlogin"
+                    type="button"
+                    id="password-addon"
+                    onClick={() =>
+                      showPassword
+                        ? setShowPassword(false)
+                        : setShowPassword(true)
+                    }
+                  >
+                    {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                  </button>
                   <label className="label2" htmlFor="user">
                     Enter Your Password
                   </label>

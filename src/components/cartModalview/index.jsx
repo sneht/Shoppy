@@ -10,6 +10,7 @@ const CartModal = (props) => {
   const [num, setNum] = useState(1);
   const [quantityCheck, setQuantityCheck] = useState(false);
 
+
   const goBack = () => {
     props.closeHandle();
   };
@@ -34,6 +35,7 @@ const CartModal = (props) => {
   };
   const incNum = (e) => {
     e.preventDefault();
+    // setNum(num+1)
     setNum(Number(num) + 1);
   };
   const decNum = (e) => {
@@ -70,7 +72,7 @@ const CartModal = (props) => {
           <div className=" col">
             <img src={URL + data.img} className="card-img-top" alt="..." />
           </div>
-          <div className=" col">
+          <div className="col">
             <div className="nameModal">
               <b>{data.name}</b>
             </div>

@@ -31,7 +31,7 @@ export default function Verify() {
       })
     );
     setData(response[0].firstName);
-    
+
   };
   // console.log(Data)
 

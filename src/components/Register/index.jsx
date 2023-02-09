@@ -11,6 +11,7 @@ import {
   validEmail,
 } from "../../utils/helper";
 import { userHandlerData } from "../../service/auth.service";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 // import { sendData } from "../../services/authservices";
 
@@ -26,6 +27,7 @@ export default function Register() {
   const [phonenoErr, setphonenoErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
   const [msg, setMsg] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   // const [fromdata, setformData] = useState([]);
   const [selected, setSelected] = useState(false);
@@ -79,11 +81,15 @@ export default function Register() {
   };
 
   const handleSubmit = (e) => {
-    if (validate() !== true) {
-    } else {
+    if (validate()) {
       postData(e);
       setSelected(true);
     }
+    // if (validate() !== true) {
+    // } else {
+    //   postData(e);
+    //   setSelected(true);
+    // }
     e.preventDefault();
   };
 
@@ -95,8 +101,8 @@ export default function Register() {
       email,
       password,
       phoneNumber,
-      userImg:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+      // userImg:"/images/UserImg.png"
+        // "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
     };
     console.log(body);
     const response = await userHandlerData(body); // eslint-disable-next-line
@@ -133,7 +139,7 @@ export default function Register() {
                   <div className="form-floating mb-1">
                     <input
                       className="form-control"
-                      placeholder="Enter Your Frist Name"
+                      placeholder="Enter Your First Name"
                       type="text"
                       name="Firstname"
                       maxLength={15}
@@ -145,7 +151,7 @@ export default function Register() {
                         setMsg(""),
                       ]}
                     />
-                    <label htmlFor="fristnameErr">Enter Your Frist Name</label>
+                    <label htmlFor="fristnameErr">Enter Your First Name</label>
                     {fnameErr && <p className="errorstyle">{fnameErr}</p>}
                   </div>
                 </div>
@@ -219,7 +225,7 @@ export default function Register() {
               <label className="form-label">Password</label>
               <div className="form-floating mb-1">
                 <input
-                  type="current-password"
+                  type={`${showPassword ? "text" : "password"}`}
                   className="form-control form-control-sm"
                   placeholder="Enter Password"
                   name="password"
@@ -232,6 +238,18 @@ export default function Register() {
                     setMsg(""),
                   ]}
                 />
+                <button
+                  className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted showPassword"
+                  type="button"
+                  id="password-addon"
+                  onClick={() =>
+                    showPassword
+                      ? setShowPassword(false)
+                      : setShowPassword(true)
+                  }
+                >
+                  {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                </button>
                 <label htmlFor="passwordErr">Enter Your Password</label>
                 {passwordErr && <p className="errorstyle">{passwordErr}</p>}
               </div>

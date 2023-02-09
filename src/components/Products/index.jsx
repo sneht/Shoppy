@@ -1,5 +1,6 @@
 import "../Products/product.css";
 import { URL } from "../../utils/helper";
+
 const Products = (props) => {
   const passtoParent = () => {
     props.parentFunc();

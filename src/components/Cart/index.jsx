@@ -83,13 +83,13 @@ export default function Cart() {
     }
   };
 
-  const alldelete = async () => {
+  const alldelete = async (id) => {
     const response = await cartseldeleteHndlerData({
       userId: uid,
-      cartdetail: checkedList,
+      cartdetail: [id],
     });
 
-    if (response) {
+    if (response.success) {
       // call here too
       getcartproductData(uid);
       setcheckedList([]);
@@ -136,7 +136,7 @@ export default function Cart() {
                   <div
                     style={{ display: orderSubtotal > 0 ? "block" : "none" }}
                   >
-                    {checkedList.length > 0 && (
+                    {/* {checkedList.length > 0 && (
                       <button
                         className="dbutton ml-1"
                         type="button"
@@ -144,7 +144,7 @@ export default function Cart() {
                       >
                         DELETE ({checkedList.length})
                       </button>
-                    )}
+                    )} */}
                     {checkedList.length === 0 && (
                       <button
                         type="button"
@@ -183,6 +183,8 @@ export default function Cart() {
                             checkedList={checkedList}
                             onDelete={handleDelete}
                             handlecheckbox={handlecheckbox}
+                            setcheckedList={setcheckedList}
+                            alldelete={alldelete}
                           />
                         );
                       })}

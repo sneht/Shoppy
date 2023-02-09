@@ -20,6 +20,9 @@ import { useDispatch } from "react-redux";
 import { fetchCartList } from "../../js/actions";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+// import { AiOutlineHeart } from "react-icons/ai";
+// import { FaHeart } from "react-icons/fa";
+import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
 const Allproducts = (props) => {
   const dispatch = useDispatch();
@@ -34,8 +37,13 @@ const Allproducts = (props) => {
   const [userData, setuserData] = useState([]);
   const [index, setIndex] = useState();
   const navigate = useNavigate();
-  const successnotify = (msg) =>
-    toast.success(msg, { duration: 3000, id: msg });
+  const userDetails = JSON.parse(localStorage.getItem("userData"));
+
+  const successnotify = (msg) => {
+    userDetails
+      ? toast.success(msg, { duration: 3000, id: msg })
+      : toast.error(msg, { duration: 3000, id: msg });
+  };
   useEffect(() => {
     setuserData(JSON.parse(localStorage.getItem("userData")) || []);
     let categoryId;
@@ -68,6 +76,7 @@ const Allproducts = (props) => {
     switch (i) {
       case "ALL":
         navigate(`/products`);
+        getproductData("All");
         break;
       case "Popularity":
         navigate(`/products?filter=Popularity`);
@@ -284,7 +293,6 @@ const Allproducts = (props) => {
         const res2 = await wishlistDataListHandler(
           listBody({ where: { userId: data?.id } })
         );
-        console.log(res2);
         setProductData(
           productData.map((obj) =>
             res2[0].wishlist.some((w) => w.productId._id === obj._id)
@@ -408,7 +416,9 @@ const Allproducts = (props) => {
                           {card._id === wishloading ? (
                             <div class="spinner-border spinner-border-sm" />
                           ) : (
-                            <span>&#9829;</span>
+                            <span>
+                              <HiHeart />
+                            </span>
                           )}
                         </div>
                       ) : (
@@ -419,7 +429,9 @@ const Allproducts = (props) => {
                           {card._id === wishloading ? (
                             <div class="spinner-border spinner-border-sm " />
                           ) : (
-                            <span>&#9825;</span>
+                            <span>
+                              <HiOutlineHeart />
+                            </span>
                           )}
                         </div>
                       )}
