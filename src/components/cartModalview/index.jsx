@@ -9,8 +9,7 @@ const CartModal = (props) => {
   const quantity = props.childata.quantity;
   const [num, setNum] = useState(1);
   const [quantityCheck, setQuantityCheck] = useState(false);
-
-
+  console.log(data)
   const goBack = () => {
     props.closeHandle();
   };
@@ -27,6 +26,7 @@ const CartModal = (props) => {
         productId: data._id,
         quantity: num,
       };
+      console.log(body);
       props.cartFunc(body);
       props.closeHandle();
     } else {
@@ -87,12 +87,20 @@ const CartModal = (props) => {
             </div>
 
             <div className="counterModal d-flex justify-content-center">
-              <button className="counterbuttonModal" onClick={(e) => decNum(e)}>
+              <button
+                className="counterbuttonModal"
+                style={{ marginTop: "0px" }}
+                onClick={(e) => decNum(e)}
+              >
                 -
               </button>
               <b className="counterNum">{num}</b>
 
-              <button className="counterbuttonModal" onClick={(e) => incNum(e)}>
+              <button
+                className="counterbuttonModal"
+                style={{ marginTop: "0px" }}
+                onClick={(e) => incNum(e)}
+              >
                 +
               </button>
             </div>

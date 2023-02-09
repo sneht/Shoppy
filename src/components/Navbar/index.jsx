@@ -25,7 +25,7 @@ export default function Navbar(props) {
   const navigate = useNavigate();
   const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);
-  const userDetails = JSON.parse(localStorage.getItem("userData"));
+  const userDetails = JSON.parse(localStorage.getItem("Data"));
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (isOpen && ref.current && !ref.current.contains(e.target)) {

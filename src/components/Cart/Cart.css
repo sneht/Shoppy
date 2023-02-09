@@ -9,8 +9,9 @@
   margin: 4%;
 }
 .dbutton{
-  margin-top: 12%;
+  /* margin-top: 12%; */
 }
+
 .card {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -52,12 +53,22 @@
   width: 20%;
 }
 .cartrow {
-  width: 92%;
+  /* width: 92%; */
+  width: 96%;
 }
 .cartheight {
   height: 450px;
 }
-
+.counterbuttonModal {
+  background-color: transparent;
+  color: rgb(0, 1, 1);
+  font-size: 25px;
+  border: none;
+  /* height: 3rem; */
+  margin-top: -10px;
+  border-radius: 50%;
+  width: 3rem;
+}
 .checkbox-input {
   clip: rect(0 0 0 0);
   clip-path: inset(100%);

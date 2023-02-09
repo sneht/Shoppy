@@ -264,6 +264,7 @@ const Allproducts = (props) => {
     setChildata([]);
   };
   const cartFunc = async (cartdata) => {
+    console.log(cartdata);
     setChildata([]);
 
     const body = {
