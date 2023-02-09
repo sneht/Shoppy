@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Categories from "../../components/Categories";
 import Dashboard from "../../components/Dashboard";

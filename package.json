@@ -58,7 +58,7 @@
     "autoprefixer": "10.4.5"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-app-rewired start",
     "eject": "react-app-rewired start"

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -12,6 +13,7 @@ export default function Products() {
   useEffect(() => {
     chnageLoading();
   }, [navbar, products]);
+
   const chnageLoading = () => {
     try {
       if (!navbar && !products) {

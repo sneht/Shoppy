@@ -25,7 +25,6 @@ export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    
     const checkIfClickedOutside = (e) => {
       if (isOpen && ref.current && !ref.current.contains(e.target)) {
         setIsOpen(false);
@@ -153,7 +152,7 @@ export default function Navbar(props) {
               {isOpen && (
                 <>
                   {searchdata?.products?.length ||
-                    searchdata?.category?.length >= 0 ? (
+                  searchdata?.category?.length >= 0 ? (
                     <div className="movieList">
                       <div>
                         {searchdata?.category?.length > 0 ? (
@@ -248,6 +247,7 @@ export default function Navbar(props) {
                       {categoriesData?.map((card, index) => {
                         return (
                           <Link
+                            //in a object string and value going to change then require $ sign
                             key={`category_${index}`}
                             to={`/products?cid=${card._id}`}
                             id={card._id}

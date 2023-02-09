@@ -79,8 +79,12 @@ export default function Register() {
   };
 
   const handleSubmit = (e) => {
-    if (validate() !== true) {
-    } else {
+    // if (validate() !== true) {
+    // } else {
+    // postData(e);
+    // setSelected(true);
+    // }  
+    if (validate()) {
       postData(e);
       setSelected(true);
     }
@@ -101,6 +105,7 @@ export default function Register() {
     console.log(body);
     const response = await userHandlerData(body); // eslint-disable-next-line
     if (response.success) {
+      console.log(response);
       navigate(`/verify?cid=${response?.data._id}`);
       suceessUser("Verification email sent successfully!");
       setSelected(false);
