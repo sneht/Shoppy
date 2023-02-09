@@ -89,6 +89,31 @@ export default function Checkout() {
   //   {productId: "" , quantity:""}
   // ]
 
+  const validation = () => {
+    let addressIsValid = true;
+
+    if (!address_1) {
+      addressIsValid = false;
+      setAddressErr("Please fill this field");
+    }
+    if (!address_2) {
+      addressIsValid = false;
+      setAddress2Err("Please fill this field");
+    }
+    if (!label) {
+      addressIsValid = false;
+      setLabelErr("Please fill this field");
+    }
+    if (!landmark) {
+      addressIsValid = false;
+      setLandmarkErr("Please fill this field");
+    }
+    if (!pincode) {
+      addressIsValid = false;
+      setPincodeErr("Please fill this field");
+    }
+    return addressIsValid;
+  };
   useEffect(() => {
     let userId;
     if (search.split("=").length > 0) {
@@ -136,7 +161,7 @@ export default function Checkout() {
       setpromocodeData(response);
     }
   };
-
+  // This is Extra
   const getuserData = async (userId) => {
     // eslint-disable-next-line
     const response = await userHndlerData(userId);
@@ -183,11 +208,12 @@ export default function Checkout() {
   // };
 
   const addresshandleSubmit = (e) => {
-    postAddData(e);
-    setAdddiv(false);
-    getaddData();
-
     e.preventDefault();
+    if (validation()) {
+      postAddData(e);
+      setAdddiv(false);
+      getaddData();
+    }
   };
 
   const postAddData = async (event) => {

@@ -17,41 +17,53 @@ function ForgotPassword() {
 
   const validate = () => {
     let formIsValid = true;
-    if (!validEmail.test(email)) {
-      formIsValid = false;
-      setEmailErr("Your Email is invalid");
-    }
 
     if (!email) {
       formIsValid = false;
       setEmailErr("Your Email is required");
+    } else if (!validEmail.test(email)) {
+      formIsValid = false;
+      setEmailErr("Your Email is invalid");
     }
 
     return formIsValid;
   };
 
   const handleSubmit = (e) => {
-    if (validate() !== true) {
-    } else {
+    e.preventDefault();
+    if (validate()) {
       postData(e);
       setSelected(true);
     }
-    e.preventDefault();
+    // if (validate() !== true) {
+    // } else {
+    //   postData(e);
+    //   setSelected(true);
+    // }
   };
 
   const postData = async (event) => {
     event.preventDefault();
+
     const body = {
       email,
     };
     const response = await forgotpassHandlerData(body); // eslint-disable-next-line
-    if (response.status == "400") {
+    if (response) {
       setSelected(false);
-    }
-    if (response.message) {
+      setMsg(response.message);
+    } else {
       setSelected(false);
+      alert("Somthing went wrong");
     }
-    setMsg(response.message);
+
+    // if (response.status == "400") {
+    //   setSelected(false);
+    // }
+    // if (response.message) {
+    //   setSelected(false);
+    // }
+    // setMsg(response.message);
   };
 
   return (

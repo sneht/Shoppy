@@ -20,10 +20,12 @@ export default function Navbar(props) {
   const [token, setToken] = useState();
   const [userData, setuserData] = useState(null);
   const [searchdata, setSearchData] = useState([]);
+  const [searchedText, setSearchedText] = useState();
+
   const navigate = useNavigate();
   const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);
-
+  const userDetails = JSON.parse(localStorage.getItem("userData"));
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (isOpen && ref.current && !ref.current.contains(e.target)) {
@@ -67,15 +69,15 @@ export default function Navbar(props) {
   };
 
   const searchHandler = async (e) => {
+    setSearchedText(e.target.value.length);
     try {
       if (e.target.value.length > 1) {
         const body = {
           searchText: e.target.value,
         };
         const response = await catchSearchData(body);
-
         setSearchData(response.data[0]);
-      } else {
+      } else if (e.target.value.length === 0) {
         setSearchData([]);
       }
     } catch (error) {
@@ -99,6 +101,9 @@ export default function Navbar(props) {
   return (
     <>
       <nav className="navbar navbar-expand-md fixed-top text">
+        <p className="userName">{`Hello ${
+          userDetails ? userDetails.firstName : ""
+        }`}</p>
         <div className="containe hell" ref={ref}>
           <div className="row topnavbar">
             <div className="col-sm">
@@ -149,7 +154,7 @@ export default function Navbar(props) {
                   {isOpen && <i class="fa fa-times"></i>}
                 </button>
               </div>
-              {isOpen && (
+              {isOpen ? (
                 <>
                   {searchdata?.products?.length ||
                   searchdata?.category?.length >= 0 ? (
@@ -197,6 +202,8 @@ export default function Navbar(props) {
                               </li>
                             );
                           })
+                        ) : searchedText === 0 ? (
+                          ""
                         ) : (
                           <div className="noData">
                             <p>No Such Data Found !</p>
@@ -208,6 +215,8 @@ export default function Navbar(props) {
                     ""
                   )}
                 </>
+              ) : (
+                ""
               )}
             </div>
 
@@ -269,17 +278,17 @@ export default function Navbar(props) {
                     >
                       <i className="fas fa-shopping-cart"></i>
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-scuess cartcount">
-                        {cartData.length}
+                        {userDetails ? cartData.length : 0}
                       </span>
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to={`/wishlist`}>
                       <div className="btn watchListicon position-relative">
                         <span>&#9825;</span>
                       </div>
                     </Link>
-                  </li>
+                  </li> */}
 
                   <li
                     className="nav-item dropdown"
@@ -314,7 +323,9 @@ export default function Navbar(props) {
                       >
                         Profile
                       </Link>
-
+                      <Link className="nav-link" to={`/wishlist`}>
+                        Wishlist
+                      </Link>
                       <Link className="nav-link" to={`/order`}>
                         Order
                       </Link>

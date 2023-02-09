@@ -21,8 +21,8 @@ export default function Dashboard(props) {
     const response = await headerimgHandle(
       listBody({ where: { isActive: true }, perPage: 1000 })
     );
-    setimgData(response);
     if (response) {
+      setimgData(response);
       props.setTopLoading(false);
     }
   };
@@ -36,9 +36,9 @@ export default function Dashboard(props) {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        pagination={{
-          clickable: true,
-        }}
+        // pagination={{
+        //   clickable: true,
+        // }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"

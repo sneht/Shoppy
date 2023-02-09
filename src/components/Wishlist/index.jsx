@@ -68,7 +68,8 @@ export default function Wishlist() {
             <div class="spinner-border" role="status">
               <span class="sr-only">Loading...</span>
             </div>
-          </div>
+          </div>  
+
         ) : (
           <>
             {wishlistData?.length > 0 ? (

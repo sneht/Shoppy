@@ -24,8 +24,13 @@ const ProductList = (props) => {
   const [childata, setChildata] = useState([]);
   const [userData, setuserData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const successnotify = (msg) =>
-    toast.success(msg, { duration: 4000, id: msg });
+  const userDetails = JSON.parse(localStorage.getItem("userData"));
+
+  const successnotify = (msg) => {
+    userDetails
+      ? toast.success(msg, { duration: 4000, id: msg })
+      : toast.error(msg, { duration: 4000, id: msg });
+  };
 
   // const fetcher = (url) => axios.post(url).then((res) => res.data);
   // const { data, error } = useQuery("products", () =>
@@ -45,7 +50,6 @@ const ProductList = (props) => {
     setChildata(info);
   };
   const cartFunc = async (cartdata) => {
-    console.log("cartdata: ", cartdata);
     setChildata([]);
 
     const body = {
@@ -59,7 +63,11 @@ const ProductList = (props) => {
     dispatch(fetchCartList(listBody({ where: { userId: cartdata.userId } })));
     // EventEmitter.dispatch("DATA", body.quantity.length);
     if (response) {
-      successnotify("Product added to cart successfully!");
+      if (userDetails) {
+        successnotify("Product added to cart successfully!");
+      } else {
+        successnotify("Please Log in");
+      }
     }
   };
 
@@ -71,12 +79,18 @@ const ProductList = (props) => {
   }, []);
 
   const getProductData = async () => {
-    const response = await productHndlerData(
-      listBody({ where: { isActive: true } })
-    );
-    setproductData(response);
-    setLoading(false);
-    props.setTopLoading(false);
+    try {
+      const response = await productHndlerData(
+        listBody({ where: { isActive: true } })
+      );
+      if (response) {
+        setproductData(response);
+        setLoading(false);
+        props.setTopLoading(false);
+      }
+    } catch {
+      console.error("Somthing went wrong");
+    }
   };
 
   return (

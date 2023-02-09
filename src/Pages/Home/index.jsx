@@ -14,9 +14,10 @@ export default function Home() {
   const [productList, setProductList] = useState(true);
 
   useEffect(() => {
-    chnageLoading();
+    changeLoading();
   }, [navbar, dashboard, categories, productList]);
-  const chnageLoading = () => {
+
+  const changeLoading = () => {
     try {
       if (!navbar && !dashboard && !categories && !productList) {
         setTopLoading(false);

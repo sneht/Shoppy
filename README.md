@@ -13,8 +13,13 @@ i.e. already added 2 qty and require one more then qty should update from add to
 
 5) When hover on arrow fafa icon then not showing any text i.e. Log out or else to understand.
 
-6) 
+6) In a category preview line no. 77 - require gap 75 so can adjust 5 slide also to fit in page
 
+7) To Understand line no 92 and discussed with Sneh.(Category)
+
+8) jsPDF in - order. ordex.jsx
+
+9) 
 
 
 

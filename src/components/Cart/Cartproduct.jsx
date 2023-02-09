@@ -4,9 +4,7 @@ import { URL } from "../../utils/helper";
 
 const Cartproduct = (props) => {
   return (
-
-    <label className=
-      "checkbox-wrapper cartrow" >
+    <label className="checkbox-wrapper cartrow">
       <input
         type="checkbox"
         className="checkbox-input"
@@ -14,8 +12,13 @@ const Cartproduct = (props) => {
         checked={props.checkedList.includes(props.card.productId._id)}
         onChange={(e) => props.handlecheckbox(e)}
       />
-      <span className=
-        {props.checkedList.includes(props.card.productId._id) ? "checkbox-tile-bg" : "checkbox-tile "}>
+      <span
+        className={
+          props.checkedList.includes(props.card.productId._id)
+            ? "checkbox-tile-bg"
+            : "checkbox-tile "
+        }
+      >
         <span className="checkbox-icon">
           <div className="col-md-12 main pt-2" key={props.card.id}>
             <div className="row cartrow">
@@ -33,17 +36,26 @@ const Cartproduct = (props) => {
               </div>
               <div className="col-md-3 mt-3">
                 <h5 className="text">
-                  &#x20b9; {props.card.productId.discountPrice * props.card.quantity}
+                  &#x20b9;{" "}
+                  {props.card.productId.discountPrice * props.card.quantity}
                   /-
                 </h5>
                 <h6>
                   &#x20b9;
                   <del>
-                    {
-                      props.card.productId.price}
+                    {props.card.productId.price}
                     /-
                   </del>
                 </h6>
+                <button
+                  className="dbutton ml-1"
+                  type="button"
+                  onClick={() => [
+                    props.alldelete(props.card.productId._id)
+                  ]}
+                >
+                  DELETE
+                </button>
               </div>
               {/* <div className="col-md-1 mt-3">
                   <button
@@ -59,7 +71,6 @@ const Cartproduct = (props) => {
         </span>
       </span>
     </label>
-
   );
 };
 export default Cartproduct;
