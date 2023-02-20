@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Allproducts from "../../components/AllProducts";
 import Navbar from "../../components/Navbar";
-import TopLoading from "../../components/TopLoading";
+// import TopLoading from "../../components/TopLoading";
 
 export default function Products() {
   const [topLoading, setTopLoading] = useState(true);
@@ -12,6 +12,7 @@ export default function Products() {
   const [products, setProducts] = useState(true);
   useEffect(() => {
     chnageLoading();
+    window.scrollTo(0, 0);
   }, [navbar, products]);
   const chnageLoading = () => {
     try {
@@ -24,8 +25,8 @@ export default function Products() {
   };
   return (
     <>
-      {topLoading ? <TopLoading /> : <></>}
-      <Navbar setTopLoading={setNavbar} />
+      {/* {topLoading ? <TopLoading /> : <></>} */}
+      <Navbar setNavbar={setNavbar} topLoading={topLoading} />
       <Allproducts setTopLoading={setProducts} />
     </>
   );

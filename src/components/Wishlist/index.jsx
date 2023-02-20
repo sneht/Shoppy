@@ -17,7 +17,7 @@ export default function Wishlist() {
     getData();
   }, []);
   const getData = async () => {
-    let data = JSON.parse(localStorage.getItem("userData") || "[]");
+    let data = JSON.parse(localStorage.getItem("Data") || "[]");
     const res = await wishlistDataListHandler(
       listBody({ where: { userId: data?.id } })
     );
@@ -29,7 +29,7 @@ export default function Wishlist() {
   };
   const wishlist = async (id) => {
     setButtonLoading(id);
-    let data = JSON.parse(localStorage.getItem("userData") || "[]");
+    let data = JSON.parse(localStorage.getItem("Data") || "[]");
     const res = await wishlistDataHandler({
       userId: data?.id,
       productId: id,
@@ -62,11 +62,11 @@ export default function Wishlist() {
         </div>
       </div>
 
-      <div class="row cardSec">
+      <div className="row cardSec">
         {loading ? (
-          <div class="d-flex justify-content-center mainLoading ">
-            <div class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
+          <div className="d-flex justify-content-center mainLoading ">
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
             </div>
           </div>  
 
@@ -75,7 +75,7 @@ export default function Wishlist() {
             {wishlistData?.length > 0 ? (
               wishlistData?.map((data) => {
                 return (
-                  <div class=" maincard col-3 row ">
+                  <div className=" maincard col-3 row ">
                     <img
                       src={URL + data.productId.img}
                       alt={data.productId.name}
@@ -87,9 +87,9 @@ export default function Wishlist() {
                     </div>
 
                     {buttonLoading === data?.productId._id ? (
-                      <button class="remove text " type="button" disabled>
+                      <button className="remove text " type="button" disabled>
                         <span
-                          class="spinner-border spinner-border-sm"
+                          className="spinner-border spinner-border-sm"
                           role="status"
                           aria-hidden="true"
                         ></span>

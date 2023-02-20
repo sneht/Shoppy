@@ -2,6 +2,7 @@ import React from "react";
 import { formateNum, URL } from "../../utils/helper";
 import "../Order/Order.css";
 const Ordercard = (props) => {
+  var total=props.card.totalPrice
   return (
     <div className="ordercard-main">
       <div className="row ordercard">
@@ -11,7 +12,7 @@ const Ordercard = (props) => {
           Date: {props.card.createdAt.substring(0, 10)}
         </div>
         <div className="col-sm-2">
-          Total: {formateNum(props.card.totalPrice)}
+          Total: {formateNum(total.toFixed(2))}
           <br />
         </div>
         <div className="col-sm-4">
@@ -31,7 +32,7 @@ const Ordercard = (props) => {
             {props.loading !== props.index ? (
               "Download Invoice"
             ) : (
-              <div class="spinner-border spinner-border-sm"></div>
+              <div className="spinner-border spinner-border-sm"></div>
             )}
           </button>
         </div>
@@ -66,7 +67,7 @@ const Ordercard = (props) => {
                   onClick={() => props.updateState()}
                 >
                   {props.updateLoading === props.index ? (
-                    <div class="spinner-border spinner-border-sm"></div>
+                    <div className="spinner-border spinner-border-sm"></div>
                   ) : (
                     "Cancel Order"
                   )}

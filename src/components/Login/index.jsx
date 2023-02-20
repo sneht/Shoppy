@@ -110,9 +110,13 @@ export default function Login() {
                       setMsg(""),
                     ]}
                   />
-                  <label className="label2" htmlFor="fristnameErr">
-                    Enter You Email
-                  </label>
+                  {email ? (
+                    ""
+                  ) : (
+                    <label className="label2" htmlFor="fristnameErr">
+                      Enter You Email
+                    </label>
+                  )}
                   {emailErr && <p className="errorstyle">{emailErr}</p>}
                 </div>
 
@@ -143,9 +147,13 @@ export default function Login() {
                   >
                     {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
                   </button>
-                  <label className="label2" htmlFor="user">
-                    Enter Your Password
-                  </label>
+                  {password ? (
+                    ""
+                  ) : (
+                    <label className="label2" htmlFor="user">
+                      Enter Your Password
+                    </label>
+                  )}
                   {pwdErr && <p className="errorstyle">{pwdErr}</p>}
                 </div>
               </div>

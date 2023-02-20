@@ -26,7 +26,7 @@
   margin-top: 1rem;
 }
 .counterModal {
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
@@ -43,9 +43,9 @@
   margin: 2% 6% 0 6%;
   font-size: 20px;
 }
-.counterbuttonModal:hover {
+/* .counterbuttonModal:hover {
   background-color: rgb(243, 245, 249);
-}
+} */
 .addcartToModal {
   margin-top: 1%;
 }

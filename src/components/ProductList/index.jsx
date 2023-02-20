@@ -17,6 +17,7 @@ import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
 import { fetchCartList } from "../../js/actions";
 import toast from "react-hot-toast";
+const html = document.getElementById("mainHtml");
 
 const ProductList = (props) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const ProductList = (props) => {
   const [childata, setChildata] = useState([]);
   const [userData, setuserData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const userDetails = JSON.parse(localStorage.getItem("userData"));
+  const userDetails = JSON.parse(localStorage.getItem("Data"));
 
   const successnotify = (msg) => {
     userDetails
@@ -32,18 +33,14 @@ const ProductList = (props) => {
       : toast.error(msg, { duration: 4000, id: msg });
   };
 
-  // const fetcher = (url) => axios.post(url).then((res) => res.data);
-  // const { data, error } = useQuery("products", () =>
-  //   productHndlerData(listBody({ where: { isActive: true } }))
-  // );
-  // console.error("error: ", error);
-  // console.log("data: ", data);
-
   const parentFunc = () => {
     setShow(true);
+    html.classList.add("html");
   };
+
   const closeHandle = () => {
     setShow(false);
+    html.classList.remove("html");
     setChildata([]);
   };
   const takeData = (info) => {
@@ -75,7 +72,7 @@ const ProductList = (props) => {
   // console.log("productData: ", productData);
   useEffect(() => {
     getProductData();
-    setuserData(JSON.parse(localStorage.getItem("userData")) || []);
+    setuserData(JSON.parse(localStorage.getItem("Data")) || []);
   }, []);
 
   const getProductData = async () => {
@@ -101,11 +98,10 @@ const ProductList = (props) => {
           <p className="header_two">
             E-commerce is revolutionizing the way we all shop in India.
           </p>
-          <div>
-            {productData.length > 0 &&
-              productData.slice(0, 7).map((card, index) => {
-                return (
-                  <div key={`products_${index}`}>
+            <div className="MainHomeCard">
+              {productData.length > 0 &&
+                productData.slice(0, 5).map((card, index) => {
+                  return (
                     <Products
                       index={index}
                       parentFunc={parentFunc}
@@ -113,11 +109,10 @@ const ProductList = (props) => {
                       card={card}
                       key={card.id}
                     />
-                  </div>
-                );
-              })}
-          </div>
-
+                  );
+                })}
+                <SeeMore />
+            </div>
           {loading && (
             <Box>
               <Cardskeleton />
@@ -129,9 +124,6 @@ const ProductList = (props) => {
               <Cardskeleton />
             </Box>
           )}
-          <div>
-            <SeeMore />
-          </div>
         </div>
         {show && (
           <CartModal

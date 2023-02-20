@@ -1,10 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "../AllProducts/Allproducts.css";
-// import { PopularData } from "../../Data/PopularData";
 import CartModal from "../cartModalview";
-// import { EventEmitter } from "../../utils/helper";
 import AllCategories from "../AllCategories";
-import { listBody } from "../../utils/helper";
+import { formateNum, listBody } from "../../utils/helper";
 import {
   productHndlerData,
   addcartHndlerData,
@@ -20,9 +19,9 @@ import { useDispatch } from "react-redux";
 import { fetchCartList } from "../../js/actions";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
-// import { AiOutlineHeart } from "react-icons/ai";
-// import { FaHeart } from "react-icons/fa";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
+import Loading from "../Loading";
+const html = document.getElementById("mainHtml");
 
 const Allproducts = (props) => {
   const dispatch = useDispatch();
@@ -36,8 +35,9 @@ const Allproducts = (props) => {
   const { search } = location;
   const [userData, setuserData] = useState([]);
   const [index, setIndex] = useState();
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  const userDetails = JSON.parse(localStorage.getItem("userData"));
+  const userDetails = JSON.parse(localStorage.getItem("Data"));
 
   const successnotify = (msg) => {
     userDetails
@@ -45,7 +45,7 @@ const Allproducts = (props) => {
       : toast.error(msg, { duration: 3000, id: msg });
   };
   useEffect(() => {
-    setuserData(JSON.parse(localStorage.getItem("userData")) || []);
+    setuserData(JSON.parse(localStorage.getItem("Data")) || []);
     let categoryId;
     let filter;
     let from;
@@ -68,7 +68,7 @@ const Allproducts = (props) => {
     }
 
     getproductData(filter, categoryId, from, to);
-  }, [search]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [search]);
 
   const onChnageIndex = (i) => {
     setProductData([]);
@@ -99,6 +99,7 @@ const Allproducts = (props) => {
     }
   };
   const getproductData = async (filter, log = "", from, to) => {
+    setLoader(true);
     setProductData([]);
     setLoading(true);
     let body;
@@ -127,9 +128,11 @@ const Allproducts = (props) => {
     }
     const response = await productHndlerData(body);
     if (response.length > 0) {
+      setLoader(false);
       setDataNotFound(false);
       switch (filter) {
         case "LowToHigh":
+          console.log("1");
           setProductData([]);
           setLoading(true);
           wishlist(
@@ -258,13 +261,14 @@ const Allproducts = (props) => {
   const parentFunc = (card) => {
     setChildata(card);
     setShow(true);
+    html.classList.add("html");
   };
   const closeHandle = () => {
     setShow(false);
     setChildata([]);
+    html.classList.remove("html");
   };
   const cartFunc = async (cartdata) => {
-    console.log(cartdata);
     setChildata([]);
 
     const body = {
@@ -281,7 +285,7 @@ const Allproducts = (props) => {
 
   const wishlist = async (resData, id) => {
     setWishLoading(id);
-    let data = JSON.parse(localStorage.getItem("userData") || "[]");
+    let data = JSON.parse(localStorage.getItem("Data") || "[]");
     if (id) {
       const res = await wishlistDataHandler({
         userId: data?.id,
@@ -290,7 +294,6 @@ const Allproducts = (props) => {
 
       if (res) {
         successnotify(res.message);
-
         const res2 = await wishlistDataListHandler(
           listBody({ where: { userId: data?.id } })
         );
@@ -302,7 +305,6 @@ const Allproducts = (props) => {
           )
         );
         props.setTopLoading(false);
-
         setLoading(false);
         setWishLoading(null);
       }
@@ -327,188 +329,316 @@ const Allproducts = (props) => {
 
   return (
     <>
-      <div className="row no-gutters datas_container text">
-        <div className="col-3 filter_div">
-          <div className="row text">
-            <div className="col-12 productBrud">
-              <div className="page-title-box">
-                <div className="page-title-right">
-                  <ol className="breadcrumb m-0">
-                    <li className="breadcrumb-item">
-                      <Link className="breadcrumb-item active text" to="/">
-                        Home
-                      </Link>
-                    </li>
-                    <li className="breadcrumb-item active">Products</li>
-                  </ol>
-                </div>
-                <h4 className="page-title text">Products</h4>
-              </div>
-            </div>
-          </div>
-          <AllCategories id={getproductData} />
-        </div>
-        <div className="col-9 data_div">
-          <div className="data_container">
-            <div className="sortby">
-              Sort By :
-              <span
-                className={index === "ALL" ? "sortbyspan" : "sortbynone"}
-                onClick={() => onChnageIndex("ALL")}
-              >
-                All Products
-              </span>
-              <span
-                className={index === "Popularity" ? "sortbyspan" : "sortbynone"}
-                onClick={() => onChnageIndex("Popularity")}
-              >
-                Popularity
-              </span>
-              <span
-                className={
-                  index === "NewestFirst" ? "sortbyspan" : "sortbynone"
-                }
-                onClick={() => onChnageIndex("NewestFirst")}
-              >
-                Newest First
-              </span>
-              <span
-                className={index === "LowToHigh" ? "sortbyspan" : "sortbynone"}
-                onClick={() => onChnageIndex("LowToHigh")}
-              >
-                Price - Low to High
-              </span>
-              <span
-                className={index === "HighToLow" ? "sortbyspan" : "sortbynone"}
-                onClick={() => onChnageIndex("HighToLow")}
-              >
-                Price - High to Low
-              </span>
-              <span className="productLength">
-                Showing {productData.length} results
-              </span>
-            </div>
-            {productData.length > 0 &&
-              productData.map((card) => {
-                return (
-                  <div className="cardView">
-                    <div className="topBarCard">
-                      {card.quantity > 10 ? (
-                        <span class=" text instock">In Stock</span>
-                      ) : (
-                        <></>
-                      )}
-                      {card.quantity < 11 && card.quantity > 0 ? (
-                        <span class=" text lowstock">Selling fast!</span>
-                      ) : (
-                        <></>
-                      )}
-                      {card.quantity === 0 ? (
-                        <span class=" text outofstock">Out of Stock</span>
-                      ) : (
-                        <></>
-                      )}
-
-                      {card.isShow ? (
-                        <div
-                          className="saveIcon"
-                          onClick={() => wishlist(null, card._id)}
-                        >
-                          {card._id === wishloading ? (
-                            <div class="spinner-border spinner-border-sm" />
-                          ) : (
-                            <span>
-                              <HiHeart />
-                            </span>
-                          )}
-                        </div>
-                      ) : (
-                        <div
-                          className="saveIcon"
-                          onClick={() => wishlist(null, card._id)}
-                        >
-                          {card._id === wishloading ? (
-                            <div class="spinner-border spinner-border-sm " />
-                          ) : (
-                            <span>
-                              <HiOutlineHeart />
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                    <img
-                      src={URL + card.img}
-                      className="card-img-top"
-                      alt={card.name}
-                    />
-
-                    <div className="div1">
-                      <p className="font_cardView text">
-                        <b className="text">{card.name}</b>
-                        <br />
-                        &#x20b9;{card.discountPrice}
-                      </p>
-                    </div>
-                    <div className="third_container">
-                      <div className="fourth_container">
-                        &#x20b9;
-                        <del>{card.price}</del>
-                      </div>
-                      <div className="fifth_conatiner">
-                        {card.quantity === 0 ? (
-                          <div className="fourth_container">Out Of Stock</div>
-                        ) : (
-                          <button
-                            className="BuyButton"
-                            onClick={(e) => parentFunc(card)}
-                          >
-                            Buy Now
-                          </button>
-                        )}
-                      </div>
-                    </div>
+      {loader ? (
+        <Loading />
+      ) : (
+        <div className="row no-gutters datas_container text">
+          <div className="col-3 filter_div">
+            <div className="row text">
+              <div className="col-12 productBrud">
+                <div className="page-title-box">
+                  <div className="page-title-right">
+                    <ol className="breadcrumb m-0">
+                      <li className="breadcrumb-item">
+                        <Link className="breadcrumb-item active text" to="/">
+                          Home
+                        </Link>
+                      </li>
+                      <li className="breadcrumb-item active">Products</li>
+                    </ol>
                   </div>
-                );
-              })}
-
-            {dataNotFound && (
-              <div className="col-md-12 main pt-5">
-                <img
-                  src="/images/noproduct.png"
-                  className=" mx-auto d-block"
-                  alt="..."
-                />
-                <p className="header_one">No Products Found!</p>
-                {/* <p className="header_two">Please add product to your cart list</p> */}
+                  <h4 className="page-title text">Products</h4>
+                </div>
               </div>
-            )}
-            {!dataNotFound && loading && (
-              <>
-                <Box>
-                  <AllproductSkeleton />
-                  <AllproductSkeleton />
-                  <AllproductSkeleton />
-                  <AllproductSkeleton />
-                  <AllproductSkeleton />
-                  <AllproductSkeleton />
-                  <AllproductSkeleton />
-                  <AllproductSkeleton />
-                </Box>
-              </>
-            )}
+            </div>
+            <AllCategories id={getproductData} />
+          </div>
+          <div className="col-9 data_div">
+            <div className="data_container">
+              <div className="sortby">
+                Sort By :
+                <span
+                  className={index === "ALL" ? "sortbyspan" : "sortbynone"}
+                  onClick={() => onChnageIndex("ALL")}
+                >
+                  All Products
+                </span>
+                <span
+                  className={
+                    index === "Popularity" ? "sortbyspan" : "sortbynone"
+                  }
+                  onClick={() => onChnageIndex("Popularity")}
+                >
+                  Popularity
+                </span>
+                <span
+                  className={
+                    index === "NewestFirst" ? "sortbyspan" : "sortbynone"
+                  }
+                  onClick={() => onChnageIndex("NewestFirst")}
+                >
+                  Newest First
+                </span>
+                <span
+                  className={
+                    index === "LowToHigh" ? "sortbyspan" : "sortbynone"
+                  }
+                  onClick={() => onChnageIndex("LowToHigh")}
+                >
+                  Price - Low to High
+                </span>
+                <span
+                  className={
+                    index === "HighToLow" ? "sortbyspan" : "sortbynone"
+                  }
+                  onClick={() => onChnageIndex("HighToLow")}
+                >
+                  Price - High to Low
+                </span>
+                <span className="productLength">
+                  Showing {productData.length} results
+                </span>
+              </div>
+              <div className="Maincard">
+                {productData.length > 0 &&
+                  productData.map((card, index) => {
+                    return (
+                      <div className="card">
+                        <div className="topBarCard">
+                          {card.quantity > 10 ? (
+                            <span className="instock text-uppercase">
+                              In Stock
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                          {card.quantity < 11 && card.quantity > 6 ? (
+                            <span className="lowstock text-uppercase">
+                              Selling fast !
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                          {card.quantity < 6 && card.quantity > 0 ? (
+                            <span className="lowstock text-uppercase">
+                              Hurry up only {card.quantity} left{" "}
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                          {card.quantity === 0 ? (
+                            <span className="outofstock text-uppercase">
+                              Out of Stock
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <img
+                          src={URL + card.img}
+                          className="card-img"
+                          onClick={(e) =>
+                            card.quantity === 0 ? "" : parentFunc(card)
+                          }
+                          alt={card.name}
+                        />
+                        <div className="container">
+                          <div className="div1" style={{textAlign:"center",marginTop:"20px"}}>
+                            <p className="font_cardView text" >
+                              {card.name}
+                              <br />
+                            </p>
+                          </div>
+                          <div className="fourth_container d-flex justify-content-center">
+                            &#x20b9;<del>{formateNum(card.price)}</del>
+                            {/* <br /> */}
+                            &#x20b9; {formateNum(card.discountPrice)}
+                          </div>
+                          <p style={{textAlign:"center"}}>Specification : {card.specification}</p>
+                        </div>
+                        {card.isShow ? (
+                            <div
+                              className="saveIcon"
+                              onClick={() => wishlist(null, card._id)}
+                            >
+                              {card._id === wishloading ? (
+                                <span></span>
+                              ) : (
+                                <span className="heartIcon">
+                                  <HiHeart />
+                                </span>
+                              )}
+                            </div>
+                          ) : (
+                            <div
+                              className="saveIcon"
+                              onClick={() => wishlist(null, card._id)}
+                            >
+                              {card._id === wishloading ? (
+                                <span></span>
+                              ) : (
+                                <span className="heartIcon">
+                                  <HiOutlineHeart />
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        <div className="third_container">
+                          <div className="fifth_conatiner">
+                            {card.quantity === 0 ? (
+                              <div className="fourth_container">
+                                <button className="outofstockButton" disabled>
+                                  Out Of Stock
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                className="BuyNowButton"
+                                onClick={(e) => parentFunc(card)}
+                              >
+                                Buy Now
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      // <div className="cardView" key={index}>
+                      // <div className="topBarCard">
+                      //   {card.quantity > 10 ? (
+                      //     <span className="instock text-uppercase">
+                      //       In Stock
+                      //     </span>
+                      //   ) : (
+                      //     <></>
+                      //   )}
+                      //   {card.quantity < 11 && card.quantity > 6 ? (
+                      //     <span className="lowstock text-uppercase">
+                      //       Selling fast !
+                      //     </span>
+                      //   ) : (
+                      //     <></>
+                      //   )}
+                      //   {card.quantity < 6 && card.quantity > 0 ? (
+                      //     <span className="lowstock text-uppercase">
+                      //       Hurry up only {card.quantity} left{" "}
+                      //     </span>
+                      //   ) : (
+                      //     <></>
+                      //   )}
+                      //   {card.quantity === 0 ? (
+                      //     <span className="outofstock text-uppercase">
+                      //       Out of Stock
+                      //     </span>
+                      //   ) : (
+                      //     <></>
+                      //   )}
+                      // </div>
+                      //   <div>
+                      // <img
+                      //   src={URL + card.img}
+                      //   className="card-img"
+                      //   onClick={(e) =>
+                      //     card.quantity === 0 ? "" : parentFunc(card)
+                      //   }
+                      //   alt={card.name}
+                      // />
+                      //     <div>
+                      //     {card.isShow ? (
+                      //       <div
+                      //         className="saveIcon"
+                      //         onClick={() => wishlist(null, card._id)}
+                      //       >
+                      //         {card._id === wishloading ? (
+                      //           <span></span>
+                      //         ) : (
+                      //           <span className="heartIcon">
+                      //             <HiHeart />
+                      //           </span>
+                      //         )}
+                      //       </div>
+                      //     ) : (
+                      //       <div
+                      //         className="saveIcon"
+                      //         onClick={() => wishlist(null, card._id)}
+                      //       >
+                      //         {card._id === wishloading ? (
+                      //           <span></span>
+                      //         ) : (
+                      //           <span className="heartIcon">
+                      //             <HiOutlineHeart />
+                      //           </span>
+                      //         )}
+                      //       </div>
+                      //     )}
+                      //     </div>
+                      //   </div>
+                      // <div className="div1">
+                      //   <p className="font_cardView text">
+                      //     <b className="text">{card.name}</b>
+                      //     <br />
+                      //   </p>
+                      // </div>
+                      // <div className="third_container">
+                      //   <div className="fourth_container d-flex">
+                      //     <del>&#x20b9;{formateNum(card.price)}</del>
+                      //     {/* <br /> */}
+                      //     &#x20b9;{formateNum(card.discountPrice)}
+                      //   </div>
+                      //   <div className="fifth_conatiner">
+                      //     {card.quantity === 0 ? (
+                      //       <div className="fourth_container"></div>
+                      //     ) : (
+                      //       <button
+                      //         className="BuyButton"
+                      //         onClick={(e) => parentFunc(card)}
+                      //       >
+                      //         Buy Now
+                      //       </button>
+                      //     )}
+                      //   </div>
+                      // </div>
+                      // </div>
+                    );
+                  })}
+              </div>
+              {dataNotFound && (
+                <div className="col-md-12 main pt-5">
+                  <img
+                    src="/images/noproduct.png"
+                    className=" mx-auto d-block"
+                    alt="..."
+                  />
+                  <p className="header_one">No Products Found!</p>
+                  {/* <p className="header_two">Please add product to your cart list</p> */}
+                </div>
+              )}
+              {!dataNotFound && loading && (
+                <>
+                  <Box>
+                    <AllproductSkeleton />
+                    <AllproductSkeleton />
+                    <AllproductSkeleton />
+                    <AllproductSkeleton />
+                    <AllproductSkeleton />
+                    <AllproductSkeleton />
+                    <AllproductSkeleton />
+                    <AllproductSkeleton />
+                  </Box>
+                </>
+              )}
 
-            {show && (
-              <CartModal
-                childata={childata}
-                cartFunc={cartFunc}
-                closeHandle={closeHandle}
-                userData={userData}
-              />
-            )}
+              {show && (
+                <CartModal
+                  childata={childata}
+                  cartFunc={cartFunc}
+                  closeHandle={closeHandle}
+                  userData={userData}
+                />
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

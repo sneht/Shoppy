@@ -1,7 +1,7 @@
 import Skeleton from "@mui/material/Skeleton";
 const AllproductSkeleton = (props) => {
   return (
-    
+
     <div className="cardView ">
       <Skeleton
         variant="rectangular"

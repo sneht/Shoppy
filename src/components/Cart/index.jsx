@@ -3,28 +3,26 @@ import "./Cart.css";
 import { Link } from "react-router-dom";
 import Cartproduct from "./Cartproduct";
 import {
+  cartHndlerData,
   // cartHndlerData,
   cartproductdeleteHndlerData,
   cartseldeleteHndlerData,
 } from "../../service/auth.service";
-import { delBody, listBody } from "../../utils/helper";
+import { delBody, formateNum, listBody } from "../../utils/helper";
 import { useLocation } from "react-router-dom";
 import Cartskeleton from "./Cartskeleton";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCartList } from "../../js/actions";
 import toast from "react-hot-toast";
 
 export default function Cart() {
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.list);
-  // console.log("cart: ", cart);
-  // const [cart, setCart] = useState([]);
   const location = useLocation();
   const [uid, setuid] = useState();
   const { search } = location;
   const [loading, setLoading] = useState(true);
   const [checkedList, setcheckedList] = useState([]); // eslint-disable-next-line
   const [isCheckAll, setIsCheckAll] = useState(false);
+  const [cartDetail, setCartDetail] = useState([]);
+  const userDetails = JSON.parse(localStorage.getItem("Data"));
+
   const successnotify = (msg) =>
     toast.success(msg, { duration: 4000, id: msg });
 
@@ -41,24 +39,29 @@ export default function Cart() {
   }, [search]);
 
   const getcartproductData = async (id) => {
-    // const response = await cartHndlerData(
-    //   listBody({
-    //     where: { userId: log },
-    //   })
-    // );
-    // setLoading(false);
+    const response = await cartHndlerData(
+      listBody({
+        where: { userId: userDetails.id },
+      })
+    );
+    if (response) {
+      // console.log("response", response[0].cartdetail)
 
-    // if (response.length > 0) {
-    //   setCart(response[0]?.cartdetail);
-    // } else {
-    // }
-    dispatch(fetchCartList(listBody({ where: { userId: id } })));
+      setLoading(false);
+      // response[0].cartdetail.map((item) =>
+      //   item.quantity === 0 ? "" : console.log(item)
+      // );
+      // console.log(response[0].cartdetail.map((item)=>console.log(item.quantity)));
+      setCartDetail(response[0].cartdetail);
+    } else {
+    }
     setLoading(false);
   };
 
   var orderSubtotal = 0;
-  for (var i = 0; i < cart.length; i++) {
-    orderSubtotal += cart[i].productId.discountPrice * cart[i].quantity;
+  for (var i = 0; i < cartDetail.length; i++) {
+    orderSubtotal +=
+      cartDetail[i].productId.discountPrice * cartDetail[i].quantity;
   }
 
   const handleDelete = async (itemId) => {
@@ -102,7 +105,7 @@ export default function Cart() {
     if (isCheckAll) {
       setcheckedList([]);
     } else {
-      setcheckedList(cart.map((li) => li.productId._id));
+      setcheckedList(cartDetail.map((li) => li.productId._id));
     }
   };
 
@@ -117,13 +120,13 @@ export default function Cart() {
   return (
     <>
       <div className="container">
-        {cart.length > 0 && (
+        {cartDetail.length > 0 && (
           <div className="mb-5 row">
             <div
               className={
-                cart.length > 0
-                  ? "pe-xl-3 col-lg-8 card giveMargin"
-                  : "pe-xl-3 col-lg-12 card giveMargin"
+                cartDetail.length > 0
+                  ? "pe-xl-3 col-lg-8  cart_card giveMargin"
+                  : "pe-xl-3 col-lg-12 cart_card giveMargin"
               }
             >
               <div className="cart mb-1">
@@ -131,7 +134,7 @@ export default function Cart() {
                 <div className="mainBody-content">
                   <h4 className="mainBody-heading mainBody">Shopping Cart</h4>
                   <div className="text">
-                    <p>You have {cart.length} items in your cart.</p>{" "}
+                    <p>You have {cartDetail.length} items in your cart.</p>{" "}
                   </div>
                   <div
                     style={{ display: orderSubtotal > 0 ? "block" : "none" }}
@@ -150,7 +153,7 @@ export default function Cart() {
                         type="button"
                         className="dbutton ml-1"
                         onClick={handleSelectAll}
-                        checked={checkedList.includes(cart._id)}
+                        checked={checkedList.includes(cartDetail._id)}
                       >
                         Select All
                       </button>
@@ -168,21 +171,24 @@ export default function Cart() {
                 </div>
                 <div
                   className={
-                    cart.length > 2
+                    cartDetail.length > 2
                       ? "container cartscroll cartheight"
                       : "container cartheight"
                   }
                 >
                   <div className="d-flex justify-content-center row cartheight">
-                    {cart.length > 0 &&
-                      cart.map((card) => {
+                    {cartDetail.length > 0 &&
+                      cartDetail.map((card) => {
+                        
                         return (
                           <Cartproduct
                             card={card}
+                            setCartDetail={setCartDetail}
                             key={`cartproduct_${card.id}}`}
                             checkedList={checkedList}
                             onDelete={handleDelete}
                             handlecheckbox={handlecheckbox}
+                            getcartproductData={getcartproductData}
                             setcheckedList={setcheckedList}
                             alldelete={alldelete}
                           />
@@ -197,7 +203,7 @@ export default function Cart() {
               style={{ display: orderSubtotal > 0 ? "block" : "none" }}
               className="col-lg-4 mainBody giveMargin"
             >
-              <div className="mb-5 card">
+              <div className="mb-5 cart_card">
                 <div className="card-header">
                   <h6 className="mb-0">Order Summary</h6>
                 </div>
@@ -211,7 +217,7 @@ export default function Cart() {
                       <tr>
                         <th className="py-4">Order Subtotal</th>
                         <td className="py-4 text-end text-muted">
-                          &#x20b9; {orderSubtotal}
+                          &#x20b9; {formateNum(orderSubtotal)}
                         </td>
                       </tr>
                       <tr>
@@ -223,14 +229,14 @@ export default function Cart() {
                       <tr>
                         <th className="py-4">Tax (SGST+ CGST)</th>
                         <td className="py-4 text-end text-muted">
-                          &#x20b9; {tax.toFixed(2)}
+                          &#x20b9; {formateNum(tax.toFixed(2))}
                         </td>
                       </tr>
                       <tr>
                         <th className="pt-4 border-0">Total</th>
                         <td className="pt-4 border-0 text-end h5 fw-normal">
                           &#x20b9;
-                          {Total.toFixed(2)}
+                          {formateNum(Total.toFixed(2))}
                         </td>
                       </tr>
                     </tbody>
@@ -251,9 +257,9 @@ export default function Cart() {
             </div>
           </div>
         )}
-        {cart.length === 0 && !loading && (
+        {cartDetail.length === 0 && !loading && (
           <div className="mb-5 row">
-            <div className="pe-xl-3 col-lg-12 card">
+            <div className="pe-xl-3 col-lg-12 cardd">
               <div className="cart mb-3">
                 <div className="cart-body" />
                 <div className="mainBody-content"></div>

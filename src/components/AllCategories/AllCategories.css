@@ -61,10 +61,26 @@
 #touch:checked + .slide {
   height: 130px;
 }
-/**********  ENABLE THIS SCROLLER IF MORE CATEGORIES AE THERE  ***************/
+/**********  ENABLE THIS SCROLLER IF MORE CATEGORIES ARE THERE  ***************/
 .scroll_filter {
   overflow-y: scroll;
-  height: 550px;
+  height: 500px;
+}
+
+.scroll_filter {
+  overflow-y: scroll;
+  width: 100%;
+}
+.scroll_filter::-webkit-scrollbar {
+  width: 5px;
+}
+.scroll_filter::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+.scroll_filter::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgb(2, 178, 144);
 }
 /************************/
 /*USE THIS FOR A DROPDON IF HAVE SUBCATEGORIES */

@@ -84,8 +84,6 @@
   color: #000000;
 }
 
-.checkbox-input-adds:focus + .checkbox-adds {
-}
 
 .checkbox-input-adds:focus + .checkbox-adds:before {
   transform: scale(1);
@@ -138,8 +136,6 @@
   background-position: 50% 50%;
 }
 
-.checkbox-adds:hover {
-}
 
 .checkbox-adds:hover:before {
   transform: scale(1);

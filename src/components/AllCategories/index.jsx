@@ -8,9 +8,10 @@ import { useLocation } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router";
 
-const AllCategories = (props) => {
+const AllCategories = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [firstValue, setValue] = useState("");
   const [checkbox, setCheckbox] = useState([
     {
       id: "11",
@@ -34,6 +35,7 @@ const AllCategories = (props) => {
     },
   ]);
   const [categoriesData, setcategoriesData] = useState([]);
+  const [loader, setLoader] = useState(true);
   const [uid, setuid] = useState(undefined);
   const [inStock, setInStock] = useState(false);
   const { search } = location;
@@ -107,7 +109,10 @@ const AllCategories = (props) => {
     const response = await categoryHndlerData(
       listBody({ where: { isActive: true }, perPage: 1000 })
     );
-    setcategoriesData(response);
+    if (response) {
+      setLoader(false);
+      setcategoriesData(response);
+    }
   };
 
   const handleClick = (id) => {
@@ -168,6 +173,7 @@ const AllCategories = (props) => {
   });
 
   const handleForm = (data) => {
+    console.log(data);
     const seek = checkbox.map((c) =>
       c !== null ? { ...c, checked: false } : ""
     );
@@ -226,100 +232,116 @@ const AllCategories = (props) => {
             </div>
           );
         })}
-      <div className="sidebar">
-        <span>Filters</span>
-      </div>
-      <div className="filterClass">
-        <span className="filterSpan">
-          <div className="priceHead">
-            <p className="headTag">Price</p>
+      {loader ? (
+        ""
+      ) : (
+        <>
+          <div className="sidebar">
+            <span>Filters</span>
           </div>
-          <div className="priceCheckbox">
-            {checkbox.map((c) => (
-              <>
-                <input
-                  key={c?.id}
-                  name="myCheckbox"
-                  class="form-check-input"
-                  type="checkbox"
-                  checked={c.checked}
-                  onChange={(e) => checkfunction(e.target.checked, c.id)}
-                />
-                <label class="form-check-label">Under ₹ {c?.value}</label>
-                <br />
-              </>
-            ))}
-          </div>
-          <div className="selfinput">
-            <form onSubmit={handleSubmit(handleForm)}>
-              <Controller
-                name="from"
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <input
-                    className="inputselfField"
-                    placeholder="From ₹ Price"
-                    type={"number"}
+          <div className="filterClass">
+            <span className="filterSpan">
+              <div className="priceHead">
+                <p className="headTag">Price</p>
+              </div>
+              <div className="priceCheckbox">
+                {checkbox.map((c) => (
+                  <>
+                    <input
+                      key={c?.id}
+                      name="myCheckbox"
+                      className="form-check-input"
+                      type="checkbox"
+                      checked={c.checked}
+                      onChange={(e) => checkfunction(e.target.checked, c.id)}
+                    />
+                    <label className="form-check-label">
+                      Under ₹ {c?.value}
+                    </label>
+                    <br />
+                  </>
+                ))}
+              </div>
+              <div className="selfinput">
+                <form onSubmit={handleSubmit(handleForm)}>
+                  <Controller
                     name="from"
-                    value={value}
-                    onChange={onChange}
-                    error={!!error}
-                    helperText={error?.message ? error.message : ""}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <input
+                        className="inputselfField"
+                        placeholder="From ₹ Price"
+                        type={"number"}
+                        name="from"
+                        value={value}
+                        onChange={(e) => [onChange, setValue(e.target.value)]}
+                        error={!!error}
+                        // helperText={error?.message ? error.message : ""}
+                      />
+                    )}
+                    control={control}
+                    rules={{
+                      required: "Number only",
+                      min: 0,
+                    }}
                   />
-                )}
-                control={control}
-                rules={{
-                  required: "Number only",
-                }}
-              />
-              <Controller
-                name="to"
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <input
-                    className="inputselfField"
-                    placeholder="To ₹ Price"
-                    type={"number"}
+                  <Controller
                     name="to"
-                    value={value}
-                    onChange={onChange}
-                    error={!!error}
-                    helperText={error?.message ? error.message : ""}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <>
+                        <input
+                          className="inputselfField"
+                          placeholder="To ₹ Price"
+                          type={"number"}
+                          name="to"
+                          value={value}
+                          min={firstValue}
+                          onChange={onChange}
+                          error={!!error}
+                        />
+                        {error?.message ? (
+                          <span>{error?.message ? error.message : ""}</span>
+                        ) : (
+                          ""
+                        )}
+                      </>
+                    )}
+                    control={control}
+                    rules={{
+                      required: "Number only",
+                    }}
                   />
-                )}
-                control={control}
-                rules={{
-                  required: "Number only",
-                }}
-              />
 
-              <button type={"submit"} className="selfInputButton">
-                Go
-              </button>
-            </form>
+                  <button type={"submit"} className="selfInputButton">
+                    Go
+                  </button>
+                </form>
+              </div>
+            </span>
+            <span className="filterSpan">
+              <div className="priceHead">
+                <p className="headTag">Availability</p>
+              </div>
+              <div className="priceCheckbox">
+                <input
+                  name="myCheckbox"
+                  className="form-check-input"
+                  type="checkbox"
+                  checked={inStock}
+                  onChange={(e) => checkfunction(e.target.checked, "15")}
+                />
+                <label className="form-check-label">In Stock</label>
+                <br />
+              </div>
+            </span>
           </div>
-        </span>
-        <span className="filterSpan">
-          <div className="priceHead">
-            <p className="headTag">Availability</p>
-          </div>
-          <div className="priceCheckbox">
-            <input
-              name="myCheckbox"
-              class="form-check-input"
-              type="checkbox"
-              checked={inStock}
-              onChange={(e) => checkfunction(e.target.checked, "15")}
-            />
-            <label class="form-check-label">In Stock</label>
-            <br />
-          </div>
-        </span>
-      </div>
+        </>
+      )}
       {categoriesData.length === 0 && (
         <Box className="skeleton_box">
           <Skeleton

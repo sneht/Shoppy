@@ -1,6 +1,7 @@
 import { React, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
+import { formateNum } from "../../utils/helper";
 const Invoice = (props) => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -28,7 +29,7 @@ const Invoice = (props) => {
             </div>
             <div className="cs-invoice_right cs-text_right">
               <div className="cs-logo cs-mb5">
-                <img src="images/logob.png" alt="Logo" />
+                <img src="/images/logob.png" alt="Logo" />
               </div>
             </div>
           </div>
@@ -36,7 +37,7 @@ const Invoice = (props) => {
             <div className="cs-invoice_left">
               <b className="cs-primary_color">Invoice To:</b>
               <p>
-                {props.invoicedata.userId.firstName}{" "}
+                {props.invoicedata.userId.firstName}
                 {props.invoicedata.userId.lastName}
                 <br />
                 {props.invoicedata.addressId.address_1}
@@ -150,7 +151,7 @@ const Invoice = (props) => {
                         </td>
                         <td className="cs-width_3 cs-semi_bold  cs-primary_color cs-text_right">
                           &#x20b9;{" "}
-                          {((props.orderSubtotal / 100) * 18).toFixed(2)}
+                          {formateNum((props.orderSubtotal / 100) * 18)}
                         </td>
                       </tr>
                       <tr className="cs-border_left">
@@ -166,7 +167,7 @@ const Invoice = (props) => {
                           Total Amount
                         </td>
                         <td className="cs-width_3 cs-semi_bold cs-focus_bg cs-primary_color cs-text_right">
-                          &#8377; {props.invoicedata.totalPrice}
+                          &#8377; {formateNum(props.invoicedata.totalPrice.toFixed(2))}
                         </td>
                       </tr>
                     </tbody>

@@ -1,9 +1,9 @@
 .see_more_card {
-  width: 20%;
+  width: 100%;
   float: left;
-  margin-left: 3%;
-  margin-right: 2%;
-  margin-top: 2%;
+  margin-left: 73%;
+  margin-right: 10%;
+  margin-top: -31%;
   /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
   border-radius: 10px;
   margin-bottom: 4%;
@@ -13,7 +13,7 @@
 .see_more_button {
   background-color: rgb(2, 178, 144);
   color: rgb(240, 248, 255);
-  font-family: 'Public Sans', sans-serif;;
+  font-family: "Public Sans", sans-serif;
   border: none;
   font-size: 22px;
   height: 4rem;
@@ -46,7 +46,7 @@
   .see_more_button {
     background-color: rgb(2, 178, 144);
     color: rgb(240, 248, 255);
-    font-family: 'Public Sans', sans-serif;;
+    font-family: "Public Sans", sans-serif;
     border: none;
     font-size: 22px;
     height: 4rem;

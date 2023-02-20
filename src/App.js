@@ -9,12 +9,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Dashboard from "./components/Dashboard";
 // import Categories from "./components/Categories";
 import Cart from "./components/Cart";
-// import Allproducts from "./components/AllProducts";
-// import Checkout from "./components/Checkout";
-// import Order from "./components/Order";
-// import Verify from "./components/Verify";
-// import ForgotPassword from "./components/ForgotPassword";
-// import Confirmpassword from "./components/Confirmpassword";
 import ProtectedRoute from "./components/protectedRoutes";
 // import Successmail from "./components/successmail";
 // import User from "./components/User";
@@ -23,7 +17,7 @@ import Loading from "./components/Loading";
 import PageNotFound from "./components/PageNotFound";
 import Wishlist from "./components/Wishlist";
 
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 const Navbar = lazy(() => import("./components/Navbar"));
 const Home = lazy(() => import("./Pages/Home"));
 const Categories = lazy(() => import("./components/Categories"));
@@ -49,6 +43,7 @@ export default function App() {
               <>
                 <Suspense fallback={<Loading />}>
                   <Home />
+                  <Footer/>
                 </Suspense>
               </>
             }

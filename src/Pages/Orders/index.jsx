@@ -12,6 +12,7 @@ export default function Orders() {
   const [Orders, setOrders] = useState(true);
   useEffect(() => {
     chnageLoading();
+    window.scrollTo(0, 0);
   }, [navbar, Orders]);
   const chnageLoading = () => {
     try {
@@ -25,7 +26,7 @@ export default function Orders() {
   return (
     <>
       {topLoading ? <TopLoading /> : <></>}
-      <Navbar setTopLoading={setNavbar} />
+      <Navbar setNavbar={setNavbar} />
       <Order setTopLoading={setOrders} />
     </>
   );

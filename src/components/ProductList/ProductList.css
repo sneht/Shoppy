@@ -1,0 +1,7 @@
+.MainHomeCard{
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center;
+    width: 100%;
+    margin-left: 28px; */
+}

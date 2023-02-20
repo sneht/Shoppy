@@ -4,7 +4,7 @@ import Categories from "../../components/Categories";
 import Dashboard from "../../components/Dashboard";
 import Navbar from "../../components/Navbar";
 import ProductList from "../../components/ProductList";
-import TopLoading from "../../components/TopLoading";
+// import TopLoading from "../../components/TopLoading";
 
 export default function Home() {
   const [topLoading, setTopLoading] = useState(true);
@@ -15,6 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     changeLoading();
+    window.scrollTo(0, 0);
   }, [navbar, dashboard, categories, productList]);
 
   const changeLoading = () => {
@@ -29,8 +30,7 @@ export default function Home() {
 
   return (
     <>
-      {topLoading ? <TopLoading /> : <></>}
-      <Navbar setTopLoading={setNavbar} />
+      <Navbar setNavbar={setNavbar} topLoading={topLoading}  />
       <Dashboard setTopLoading={setDashboard} />
       <Categories setTopLoading={setCategories} />
       <ProductList setTopLoading={setProductList} />

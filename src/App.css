@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@500&display=swap");
 .body {
   position: relative;
-  overflow-y: scroll;
+  overflow-y: hidden;
   height: 440px;
   width: 100%;
   text-align: justify;
   font-family: "Public Sans", sans-serif;
+}
+.html{
+  overflow: hidden;
 }
 .button {
   cursor: pointer;

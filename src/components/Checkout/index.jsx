@@ -23,23 +23,8 @@ import {
 import Addskeleton from "./Addskeleton";
 import { Box } from "@mui/system";
 import CartsummerySkel from "./CartsummerySkel";
-// import { jsPDF } from "jspdf";
 import Invoice from "./Invoice";
-
-// const loadScript = (src) => {
-//   return new Promise((resolve, reject) => {
-//     const script = document.createElement("script");
-//     script.src = src;
-//     script.onload = () => {
-//       resolve(true);
-//     };
-//     script.onerror = () => {
-//       reject(false);
-//     };
-//     document.body.appendChild(script);
-//   });
-// };
-// const _DEV_ = document.domain === "localhost";
+import toast from "react-hot-toast";
 
 export default function Checkout() {
   /// Cart Summery>>
@@ -74,9 +59,7 @@ export default function Checkout() {
   const [loading, setLoading] = useState(true);
   const [cartsumloading, setCartSumLoading] = useState(false);
   const [invoicedata, setInvoiceData] = useState([]);
-  // const [paymentId, setPaymentId] = useState("");
 
-  // const [orderStatus, setOrderS tatus] = useState("PLACED");
   // eslint-disable-next-line
   const [cartdetail, setCartdetail] = useState([]);
   const [promocodeId, setPromocodeId] = useState();
@@ -85,9 +68,8 @@ export default function Checkout() {
   const { search } = location;
   const userId = localuserData.id;
 
-  // const cartdetail=[
-  //   {productId: "" , quantity:""}
-  // ]
+  const successnotify = (msg) =>
+    toast.error(msg, { duration: 4000, id: msg });
 
   const validation = () => {
     let addressIsValid = true;
@@ -124,7 +106,7 @@ export default function Checkout() {
     getcartproductData(userId);
     getuserData(userId);
     getaddData(userId);
-    setlocaluserData(JSON.parse(localStorage.getItem("userData")));
+    setlocaluserData(JSON.parse(localStorage.getItem("Data")));
     getPromocode();
   }, [search]);
 
@@ -229,6 +211,11 @@ export default function Checkout() {
     };
     const response = await addaddressHndlerData(body); // eslint-disable-next-line
     if (response) {
+      setAddress("");
+      setAddress2("");
+      setLabel("");
+      setPincode("");
+      setLandmark("");
       getaddData(userId);
     }
   };
@@ -270,6 +257,8 @@ export default function Checkout() {
 
     if (checked) {
       setaddressId(value);
+    } else {
+      setaddressId("");
     }
   };
 
@@ -277,10 +266,9 @@ export default function Checkout() {
     if (addressId) {
       setLoading(false);
       setGoSteps(1);
-
       localStorage.setItem("SeletedAddressId", addressId);
     } else {
-      alert("Select One Address");
+      successnotify("Select One Address");
     }
   };
 
@@ -289,6 +277,7 @@ export default function Checkout() {
 
     if (response) {
       getaddData(userId);
+      setaddressId("");
     }
   };
   const addressedit = async (id) => {
@@ -306,13 +295,17 @@ export default function Checkout() {
   };
 
   const displayRazorpay = async () => {
-    setLoading(true);
-    cartDataHandler();
-    // alert("Paymnet");
-    let r = (Math.random() + 1).toString(36).substring(2).toUpperCase();
-    // eslint-disable-next-line
-    orderinfoHandler("#" + `${r}`);
-    Navigate("/");
+    if (!promoCode) {
+      setPromocoderr("Please Select Promocode");
+    } else {
+      setLoading(true);
+      cartDataHandler();
+      // alert("Paymnet");
+      let r = (Math.random() + 1).toString(36).substring(2).toUpperCase();
+      // eslint-disable-next-line
+      orderinfoHandler("#" + `${r}`);
+      Navigate("/");
+    }
     // const res = await loadScript(
     //   "https://checkout.razorpay.com/v1/checkout.js"
     // );
@@ -419,7 +412,7 @@ export default function Checkout() {
     const body = {
       userId,
       addressId,
-      promocodeId,
+      promocodeId: promocodeId,
       orderStatus: "PLACED",
       paymentId: pId,
       discountPrice,
@@ -429,12 +422,12 @@ export default function Checkout() {
         quantity: res.quantity,
       })),
     };
-    console.log(body);
+    // console.log(body);
     const response = await orderDataHandler(body); // eslint-disable-next-line
 
     if (response) {
+      // console.log(pId);
       // console.log("ORDERDATA", response);
-
       invoiceDataHandler(pId);
     }
   };
@@ -444,13 +437,12 @@ export default function Checkout() {
       let menu = { productId: res.productId._id, quantity: res.quantity };
       return menu;
     });
-    console.log("CART", items);
     var products = await productHndlerData(
       listBody({ where: { isActive: true } })
     );
-    console.log("PRODUCT", products);
+    // console.log("PRODUCT", products);
     const result = items.concat(products);
-    console.log("CONCAT", result);
+    // console.log("CONCAT", result);
     const res = Array.from(
       result
         .reduce(
@@ -467,7 +459,7 @@ export default function Checkout() {
         )
         .values()
     );
-    console.log("ADDRES", res);
+    // console.log("ADDRES", res);
 
     var finalProduct = Object.values(
       res.reduce((r, o) => {
@@ -481,7 +473,7 @@ export default function Checkout() {
     );
 
     const quantityProduct = { data: finalProduct };
-    console.log("FINAL", finalProduct);
+    // console.log("FINAL", finalProduct);
     const updateProduct = await productUpdate(quantityProduct);
     console.log("UPDATE", updateProduct);
   };
@@ -492,6 +484,7 @@ export default function Checkout() {
     ); // eslint-disable-next-line
 
     if (response) {
+      // console.log(response);
       setGoSteps(2);
       setInvoiceData(response?.[0]);
       setCart(response?.[0].cartdetail);
@@ -698,7 +691,7 @@ export default function Checkout() {
                           maxLength={6}
                           value={pincode}
                           onChange={(e) => [
-                            setPincode(parseInt(e.target.value)),
+                            setPincode(e.target.value),
                             setPincodeErr(""),
                           ]}
                         />
@@ -994,8 +987,12 @@ export default function Checkout() {
                             onClick={() => checkPromoCode(code.couponcode)}
                             key={`promocode_${index}}`}
                           >
-                            <span class="promocode-h">{code.couponcode}</span>
-                            <h6 class="promocodeinfo">{code.description}</h6>
+                            <span className="promocode-h">
+                              {code.couponcode}
+                            </span>
+                            <h6 className="promocodeinfo">
+                              {code.description}
+                            </h6>
                           </div>
                         );
                       })}
@@ -1006,7 +1003,10 @@ export default function Checkout() {
                 <hr className="mb-4" />
                 <div className="row">
                   <div className="col-sm-2">
-                    <button className="button" onClick={() => setGoSteps(0)}>
+                    <button
+                      className="button"
+                      onClick={() => [setGoSteps(0), setaddressId("")]}
+                    >
                       Back
                     </button>
                   </div>

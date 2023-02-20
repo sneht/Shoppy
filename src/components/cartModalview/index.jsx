@@ -2,14 +2,14 @@ import "../cartModalview/cartModalview.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { URL } from "../../utils/helper";
+import { formateNum, URL } from "../../utils/helper";
+
 const CartModal = (props) => {
   const data = props.childata;
   const userData = props.userData;
   const quantity = props.childata.quantity;
   const [num, setNum] = useState(1);
   const [quantityCheck, setQuantityCheck] = useState(false);
-  console.log(data)
   const goBack = () => {
     props.closeHandle();
   };
@@ -26,7 +26,6 @@ const CartModal = (props) => {
         productId: data._id,
         quantity: num,
       };
-      console.log(body);
       props.cartFunc(body);
       props.closeHandle();
     } else {
@@ -50,17 +49,17 @@ const CartModal = (props) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       show={true}
+      onHide={goBack}
       centered
     >
       <Modal.Header className="headerModal text">
         <Modal.Title>Product Details</Modal.Title>
-
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
           fill="currentColor"
-          class="bi bi-x-circle-fill"
+          className="bi bi-x-circle-fill"
           viewBox="0 0 16 16"
           onClick={goBack}
         >
@@ -76,16 +75,26 @@ const CartModal = (props) => {
             <div className="nameModal">
               <b>{data.name}</b>
             </div>
-            <div className="priceModal">&#x20b9;{data.discountPrice * num}</div>
+            <div className="priceModal">
+              &#x20b9;{formateNum(data.discountPrice)}
+            </div>
             <div className="descriptionModal">
               M.R.P.:&#x20b9;
-              <del>{data.price * num}</del>
+              <del>{formateNum(data.price)}</del>
             </div>
             <div className="descriptionModal">
               <b>Specification : </b>
               {data.specification}
             </div>
-
+            <div className="descriptionModal">
+              {data.discountPrice * num >= 500
+                ? "Eligible for FREE Shipping"
+                : "Not Eligible for FREE Shipping"}
+            </div>
+            <br />
+            <div className="priceModal">
+              Total : &#x20b9;{formateNum(data.discountPrice * num)}
+            </div>
             <div className="counterModal d-flex justify-content-center">
               <button
                 className="counterbuttonModal"

@@ -12,6 +12,7 @@ import { URL } from "../../utils/helper";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartList } from "../../js/actions";
+import TopLoading from "../TopLoading";
 
 export default function Navbar(props) {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export default function Navbar(props) {
   useEffect(() => {
     getcategoryData();
     setToken(localStorage.getItem("accessToken"));
-    setuserData(JSON.parse(localStorage.getItem("userData")) || []);
+    setuserData(JSON.parse(localStorage.getItem("Data")) || []);
     // dispatch(fetchCartList(listBody({ where: { userId: userData.id } })));
   }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -58,13 +59,13 @@ export default function Navbar(props) {
     );
     if (response) {
       setcategoriesData(response);
-      props.setTopLoading(false);
+      props.setNavbar(false);
     }
   };
 
   const logout = () => {
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("userData");
+    localStorage.removeItem("Data");
     navigate("/login");
   };
 
@@ -101,9 +102,7 @@ export default function Navbar(props) {
   return (
     <>
       <nav className="navbar navbar-expand-md fixed-top text">
-        <p className="userName">{`Hello ${
-          userDetails ? userDetails.firstName : ""
-        }`}</p>
+      {props.topLoading ? <TopLoading /> : ""}
         <div className="containe hell" ref={ref}>
           <div className="row topnavbar">
             <div className="col-sm">
@@ -135,13 +134,13 @@ export default function Navbar(props) {
                 <input
                   ref={inputRef}
                   type="text"
-                  class="searchBar"
+                  className="searchBar"
                   placeholder="Search..."
                   onChange={(e) => searchHandler(e)}
                 />
                 <button
                   type="button"
-                  class="btn bg-transparent iconClass"
+                  className="btn bg-transparent iconClass"
                   style={{
                     marginLeft: "-40px",
                     zIndex: "100",
@@ -151,7 +150,7 @@ export default function Navbar(props) {
                   }}
                   onClick={onButtonClick}
                 >
-                  {isOpen && <i class="fa fa-times"></i>}
+                  {isOpen && <i className="fa fa-times"></i>}
                 </button>
               </div>
               {isOpen ? (
@@ -173,7 +172,6 @@ export default function Navbar(props) {
                               >
                                 <img
                                   src={URL + c.categoryImg}
-                                  class="img-rounded"
                                   alt="img"
                                   className="imageClass"
                                   width="50px"
@@ -194,7 +192,6 @@ export default function Navbar(props) {
                               >
                                 <img
                                   src={URL + p.img}
-                                  class="img-rounded"
                                   alt="img"
                                   width="50px"
                                   height="50px"
@@ -226,6 +223,7 @@ export default function Navbar(props) {
               <div
                 className="collapse navbar-collapse"
                 id="navbarsExampleDefault"
+                style={{ marginTop: "5px" }}
               >
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item active">
@@ -317,7 +315,7 @@ export default function Navbar(props) {
                         />
                       </svg>
                     </div>
-                    <ui className="dropdown-menu" aria-labelledby="dropdown01">
+                    <ul className="dropdown-menu" aria-labelledby="dropdown01">
                       <Link
                         className="nav-link"
                         to={`/user?uid=${userData?.id}`}
@@ -330,7 +328,12 @@ export default function Navbar(props) {
                       <Link className="nav-link" to={`/order`}>
                         Order
                       </Link>
-                    </ui>
+                    </ul>
+                  </li>
+                  <li className="nav-item" style={{ width: "100px" }}>
+                    <p className="userName">{`Hello, ${
+                      userDetails ? userDetails.firstName : "sign in"
+                    }`}</p>
                   </li>
                   <li className="nav-item ">
                     <Link
