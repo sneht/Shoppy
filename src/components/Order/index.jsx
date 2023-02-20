@@ -234,9 +234,7 @@ export default function Order(props) {
           </div>
           <div
             className={
-              index === "Received"
-                ? "sidebarOrder sidebarOrderafter"
-                : " sidebarOrder "
+              index === "Received" ? "sidebarOrder sidebarOrderafter" : " sidebarOrder "
             }
             onClick={() => setIndex("Received")}
           >

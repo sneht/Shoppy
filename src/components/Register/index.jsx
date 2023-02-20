@@ -265,7 +265,7 @@ export default function Register() {
               <div className="mb-1"></div>
               <button type="submit" className="button">
                 {selected ? (
-                  <div class="spinner-border" role="status" />
+                  <div className="spinner-border" role="status" />
                 ) : (
                   "Sign up"
                 )}

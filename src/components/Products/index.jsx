@@ -9,17 +9,17 @@ const Products = (props) => {
   return (
     <div className="cardView">
       {/* {props.card.quantity > 10 ? (
-        <span class=" text instock">In Stock</span>
+        <span className=" text instock">In Stock</span>
       ) : (
         <></>
       )} */}
       {props.card.quantity < 11 && props.card.quantity > 0 ? (
-        <span class=" text lowstock">Selling fast</span>
+        <span className=" text lowstock">Selling fast</span>
       ) : (
         <></>
       )}
       {props.card.quantity === 0 ? (
-        <span class=" text outofstock">Out of Stock</span>
+        <span className=" text outofstock">Out of Stock</span>
       ) : (
         <></>
       )}

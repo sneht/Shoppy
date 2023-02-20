@@ -26,6 +26,7 @@ export default function Navbar(props) {
   const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);
   const userDetails = JSON.parse(localStorage.getItem("Data"));
+
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (isOpen && ref.current && !ref.current.contains(e.target)) {
@@ -135,13 +136,13 @@ export default function Navbar(props) {
                 <input
                   ref={inputRef}
                   type="text"
-                  class="searchBar"
+                  className="searchBar"
                   placeholder="Search..."
                   onChange={(e) => searchHandler(e)}
                 />
                 <button
                   type="button"
-                  class="btn bg-transparent iconClass"
+                  className="btn bg-transparent iconClass"
                   style={{
                     marginLeft: "-40px",
                     zIndex: "100",
@@ -151,7 +152,7 @@ export default function Navbar(props) {
                   }}
                   onClick={onButtonClick}
                 >
-                  {isOpen && <i class="fa fa-times"></i>}
+                  {isOpen && <i className="fa fa-times"></i>}
                 </button>
               </div>
               {isOpen ? (
@@ -171,7 +172,6 @@ export default function Navbar(props) {
                               >
                                 <img
                                   src={URL + c.categoryImg}
-                                  class="img-rounded"
                                   alt="img"
                                   className="imageClass"
                                   width="50px"
@@ -192,7 +192,6 @@ export default function Navbar(props) {
                               >
                                 <img
                                   src={URL + p.img}
-                                  class="img-rounded"
                                   alt="img"
                                   width="50px"
                                   height="50px"
@@ -346,6 +345,7 @@ export default function Navbar(props) {
                         className="bi bi-box-arrow-right"
                         viewBox="0 0 16 16"
                       >
+                        Logout
                         <path
                           fillRule="evenodd"
                           d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"

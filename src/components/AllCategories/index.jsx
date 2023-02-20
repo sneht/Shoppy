@@ -240,12 +240,12 @@ const AllCategories = (props) => {
                 <input
                   key={c?.id}
                   name="myCheckbox"
-                  class="form-check-input"
+                  className="form-check-input"
                   type="checkbox"
                   checked={c.checked}
                   onChange={(e) => checkfunction(e.target.checked, c.id)}
                 />
-                <label class="form-check-label">Under ₹ {c?.value}</label>
+                <label className="form-check-label">Under ₹ {c?.value}</label>
                 <br />
               </>
             ))}
@@ -310,12 +310,12 @@ const AllCategories = (props) => {
           <div className="priceCheckbox">
             <input
               name="myCheckbox"
-              class="form-check-input"
+              className="form-check-input"
               type="checkbox"
               checked={inStock}
               onChange={(e) => checkfunction(e.target.checked, "15")}
             />
-            <label class="form-check-label">In Stock</label>
+            <label className="form-check-label">In Stock</label>
             <br />
           </div>
         </span>

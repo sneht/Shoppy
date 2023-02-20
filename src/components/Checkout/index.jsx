@@ -994,8 +994,8 @@ export default function Checkout() {
                             onClick={() => checkPromoCode(code.couponcode)}
                             key={`promocode_${index}}`}
                           >
-                            <span class="promocode-h">{code.couponcode}</span>
-                            <h6 class="promocodeinfo">{code.description}</h6>
+                            <span className="promocode-h">{code.couponcode}</span>
+                            <h6 className="promocodeinfo">{code.description}</h6>
                           </div>
                         );
                       })}

@@ -146,7 +146,7 @@ const Invoice = (props) => {
                       </tr>
                       <tr className="cs-border_left">
                         <td className="cs-width_3 cs-semi_bold cs-primary_color ">
-                          Tax (SGST+ CGST)
+                          Tax (SGST + CGST)
                         </td>
                         <td className="cs-width_3 cs-semi_bold  cs-primary_color cs-text_right">
                           &#x20b9;{" "}
@@ -166,7 +166,7 @@ const Invoice = (props) => {
                           Total Amount
                         </td>
                         <td className="cs-width_3 cs-semi_bold cs-focus_bg cs-primary_color cs-text_right">
-                          &#8377; {props.invoicedata.totalPrice}
+                          &#8377; {props.invoicedata.totalPrice.toFixed(2)}
                         </td>
                       </tr>
                     </tbody>

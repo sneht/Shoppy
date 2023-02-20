@@ -31,7 +31,7 @@ const Ordercard = (props) => {
             {props.loading !== props.index ? (
               "Download Invoice"
             ) : (
-              <div class="spinner-border spinner-border-sm"></div>
+              <div className="spinner-border spinner-border-sm"></div>
             )}
           </button>
         </div>
@@ -66,7 +66,7 @@ const Ordercard = (props) => {
                   onClick={() => props.updateState()}
                 >
                   {props.updateLoading === props.index ? (
-                    <div class="spinner-border spinner-border-sm"></div>
+                    <div className="spinner-border spinner-border-sm"></div>
                   ) : (
                     "Cancel Order"
                   )}

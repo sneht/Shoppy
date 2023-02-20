@@ -60,7 +60,7 @@ const CartModal = (props) => {
           width="24"
           height="24"
           fill="currentColor"
-          class="bi bi-x-circle-fill"
+          className="bi bi-x-circle-fill"
           viewBox="0 0 16 16"
           onClick={goBack}
         >

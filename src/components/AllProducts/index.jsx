@@ -394,17 +394,17 @@ const Allproducts = (props) => {
                   <div className="cardView">
                     <div className="topBarCard">
                       {card.quantity > 10 ? (
-                        <span class=" text instock">In Stock</span>
+                        <span className=" text instock">In Stock</span>
                       ) : (
                         <></>
                       )}
                       {card.quantity < 11 && card.quantity > 0 ? (
-                        <span class=" text lowstock">Selling fast!</span>
+                        <span className=" text lowstock">Selling fast!</span>
                       ) : (
                         <></>
                       )}
                       {card.quantity === 0 ? (
-                        <span class=" text outofstock">Out of Stock</span>
+                        <span className=" text outofstock">Out of Stock</span>
                       ) : (
                         <></>
                       )}
@@ -415,7 +415,7 @@ const Allproducts = (props) => {
                           onClick={() => wishlist(null, card._id)}
                         >
                           {card._id === wishloading ? (
-                            <div class="spinner-border spinner-border-sm" />
+                            <div className="spinner-border spinner-border-sm" />
                           ) : (
                             <span>
                               <HiHeart />
@@ -428,7 +428,7 @@ const Allproducts = (props) => {
                           onClick={() => wishlist(null, card._id)}
                         >
                           {card._id === wishloading ? (
-                            <div class="spinner-border spinner-border-sm " />
+                            <div className="spinner-border spinner-border-sm " />
                           ) : (
                             <span>
                               <HiOutlineHeart />
